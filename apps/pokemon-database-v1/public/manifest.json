@@ -1,0 +1,59 @@
+{
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "96x96",
+      "src": "/icon-96x96.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "192x192",
+      "src": "/icon-192x192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "384x384",
+      "src": "/icon-384x384.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "/icon-512x512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "96x96",
+      "src": "/icon-96x96-maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "192x192",
+      "src": "/icon-192x192-maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "384x384",
+      "src": "/icon-384x384-maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "/icon-512x512-maskable.png",
+      "type": "image/png"
+    }
+  ],
+  "name": "Pokemon DB(v1)",
+  "scope": "/",
+  "short_name": "Pokemon DB(v1)",
+  "start_url": "/",
+  "theme_color": "#FFFFFF"
+}
