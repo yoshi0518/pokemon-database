@@ -1,0 +1,17 @@
+{
+  "auth": {
+    "login": "ログイン",
+    "test": "テスト"
+  },
+  "comment_good_other": "{{count}} グッド コメンツ",
+  "comment_one": "イチコメ",
+  "comment_other": "{{count}} コメンツ",
+  "comment_zero": "ゼロコメ",
+  "counter_other": "{{count}} カウント",
+  "counter_zero": "ゼロ カウント",
+  "description": "説明",
+  "hello": "こんにちは",
+  "name": "こんにちは {{fn}} {{ln}}",
+  "switch": "言語切替",
+  "title": "タイトル"
+}

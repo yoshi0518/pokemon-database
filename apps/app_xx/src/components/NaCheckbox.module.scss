@@ -1,0 +1,10 @@
+.inner {
+  &[data-error] {
+    border-color: var(--mantine-color-rose-5);
+  }
+}
+
+.error {
+  color: var(--mantine-color-rose-5);
+  font-size: 13px;
+}

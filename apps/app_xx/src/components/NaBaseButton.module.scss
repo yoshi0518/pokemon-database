@@ -1,0 +1,21 @@
+.root {
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  &:hover {
+    background-color: var(--button-bg);
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    color: var(--button-color);
+    background-color: var(--button-bg);
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

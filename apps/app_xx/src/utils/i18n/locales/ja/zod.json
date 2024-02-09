@@ -1,0 +1,112 @@
+{
+  "errors": {
+    "custom": "入力形式が間違っています。",
+    "invalid_arguments": "引数が間違っています。",
+    "invalid_date": "間違った日時データです。",
+    "invalid_enum_value": "'{{received}}'は無効な値です。{{- options}}で入力してください。",
+    "invalid_intersection_types": "交差型のマージができませんでした。",
+    "invalid_literal": "無効なリテラル値です。{{expected}}を入力してください。",
+    "invalid_return_type": "返値の型が間違っています。",
+    "invalid_string": {
+      "cuid": "{{validation}}の形式で入力してください。",
+      "datetime": "{{validation}}の形式で入力してください。",
+      "email": "{{validation}}の形式で入力してください。",
+      "endsWith": "\"{{endsWith}}\"で終わる文字列である必要があります。",
+      "regex": "入力形式が間違っています。",
+      "startsWith": "\"{{startsWith}}\"で始まる文字列である必要があります。",
+      "url": "{{validation}}の形式で入力してください。",
+      "uuid": "{{validation}}の形式で入力してください。"
+    },
+    "invalid_type": "{{expected}}での入力を期待していますが、{{received}}が入力されました。",
+    "invalid_type_received_undefined": "必須",
+    "invalid_union": "入力形式が間違っています。",
+    "invalid_union_discriminator": "無効な識別子です。{{- options}}で入力してください。",
+    "not_finite": "有限数である必要があります。",
+    "not_multiple_of": "{{multipleOf}}の倍数である必要があります。",
+    "too_big": {
+      "array": {
+        "exact": "{{maximum}}個の要素である必要があります。",
+        "inclusive": "{{maximum}}個以下の要素である必要があります。",
+        "not_inclusive": "{{maximum}}個より少ない要素である必要があります。"
+      },
+      "date": {
+        "exact": "{{- maximum, datetime}}の日時である必要があります。",
+        "inclusive": "{{- maximum, datetime}}以前の日時である必要があります。",
+        "not_inclusive": "{{- maximum, datetime}}よりも前の日時である必要があります。"
+      },
+      "number": {
+        "exact": "{{maximum}}の数値である必要があります。",
+        "inclusive": "{{maximum}}以下の数値である必要があります。",
+        "not_inclusive": "{{maximum}}より小さな数値である必要があります。"
+      },
+      "set": {
+        "exact": "入力形式が間違っています。",
+        "inclusive": "入力形式が間違っています。",
+        "not_inclusive": "入力形式が間違っています。"
+      },
+      "string": {
+        "exact": "{{maximum}}文字の文字列である必要があります。",
+        "inclusive": "{{maximum}}文字以下の文字列である必要があります。",
+        "not_inclusive": "{{maximum}}文字より短い文字列である必要があります。"
+      }
+    },
+    "too_small": {
+      "array": {
+        "exact": "{{minimum}}個の要素が必要です。",
+        "inclusive": "{{minimum}}個以上の要素が必要です。",
+        "not_inclusive": "{{minimum}}個より多くの要素が必要です。"
+      },
+      "date": {
+        "exact": "{{- minimum, datetime}}の日時である必要があります。",
+        "inclusive": "{{- minimum, datetime}}以降の日時である必要があります。",
+        "not_inclusive": "{{- minimum, datetime}}よりも後の日時である必要があります。"
+      },
+      "number": {
+        "exact": "{{minimum}}の数値である必要があります。",
+        "inclusive": "{{minimum}}以上の数値である必要があります。",
+        "not_inclusive": "{{minimum}}より大きな数値である必要があります。"
+      },
+      "set": {
+        "exact": "入力形式が間違っています。",
+        "inclusive": "入力形式が間違っています。",
+        "not_inclusive": "入力形式が間違っています。"
+      },
+      "string": {
+        "exact": "{{minimum}}文字の文字列である必要があります。",
+        "inclusive": "{{minimum}}文字以上の文字列である必要があります。",
+        "not_inclusive": "{{minimum}}文字より長い文字列である必要があります。"
+      }
+    },
+    "unrecognized_keys": "オブジェクトのキー{{- keys}}が識別できません。"
+  },
+  "types": {
+    "array": "配列",
+    "bigint": "Bigint",
+    "boolean": "真偽値",
+    "date": "日時",
+    "float": "浮動小数点数",
+    "function": "関数",
+    "integer": "整数",
+    "map": "マップ",
+    "nan": "NaN",
+    "never": "never",
+    "null": "NULL",
+    "number": "数値",
+    "object": "オブジェクト",
+    "promise": "Promise",
+    "set": "セット",
+    "string": "文字列",
+    "symbol": "シンボル",
+    "undefined": "undefined",
+    "unknown": "unknown",
+    "void": "void"
+  },
+  "validations": {
+    "cuid": "CUID",
+    "datetime": "日時",
+    "email": "メールアドレス",
+    "regex": "正規表現",
+    "url": "URL",
+    "uuid": "UUID"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@project/prettier-config",
+  "description": "Prettier共通設定",
+  "version": "1.0.0",
+  "private": true,
+  "author": "yoshi0518",
+  "scripts": {
+    "fmt": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-sort-json": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.11"
+  },
+  "prettier": "./common.js"
+}
