@@ -37,6 +37,7 @@ next-env.d.ts
 
 # aspida auto generate
 src/libs/bffApi
+src/libs/pokeApi
 
 # image
 public/images
