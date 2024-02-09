@@ -1,6 +1,6 @@
 {
-  "name": "turborepo-tailwind-template",
-  "description": "",
+  "name": "pokemon-database",
+  "description": "Pokemon Database",
   "version": "1.0.0",
   "private": true,
   "author": "yoshi0518",
@@ -12,7 +12,7 @@
     "start": "turbo start",
     "storybook": "turbo storybook",
     "project": "pnpm -F \"@project/*\"",
-    "app_xx": "pnpm -F \"@project/app_xx\"",
+    "pokemon-database-v1": "pnpm -F \"@project/pokemon-database-v1\"",
     "eslint-config": "pnpm -F \"@project/eslint-config\"",
     "prettier-config": "pnpm -F \"@project/prettier-config\"",
     "tailwind-config": "pnpm -F \"@project/tailwind-config\"",
