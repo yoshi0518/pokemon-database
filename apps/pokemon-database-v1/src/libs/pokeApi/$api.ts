@@ -1,4 +1,5 @@
 import type { AspidaClient, BasicHeaders } from 'aspida';
+import { dataToURLString } from 'aspida';
 import type { Methods as Methods_xncz6f } from './pokemon';
 import type { Methods as Methods_exr7nd } from './pokemon/_id@string';
 import type { Methods as Methods_v1bpj8 } from './pokemon-species';
@@ -23,11 +24,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           $path: () => `${prefix}${prefix1}`,
         };
       },
-      get: (option?: { config?: T | undefined } | undefined) =>
+      get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH0, GET, option).json(),
-      $get: (option?: { config?: T | undefined } | undefined) =>
+      $get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH0, GET, option).json().then(r => r.body),
-      $path: () => `${prefix}${PATH0}`,
+      $path: (option?: { method?: 'get' | undefined; query: Methods_xncz6f['get']['query'] } | undefined) =>
+        `${prefix}${PATH0}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
     pokemon_species: {
       _id: (val1: string) => {

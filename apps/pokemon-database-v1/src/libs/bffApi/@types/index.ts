@@ -11,7 +11,7 @@ export type PokemonType = Partial<{
     'special-attack': number;
     'special-defense': number;
     'speed': number;
-  }[];
+  };
   types: string[];
   names: { [key: string]: string }[];
   genera: { [key: string]: string }[];
