@@ -1,11 +1,12 @@
 import { NextApiHandler } from 'next';
 // import { getServerSession } from 'next-auth';
 
+import { PokemonType } from '@/libs/bffApi/@types';
 import { pokeApiClient } from '@/libs/pokeApi';
 
-const targetLanguages = ['ja-Hrkt', 'ja', 'en'];
-
 // import { authOptions } from '../auth/[...nextauth]';
+
+const targetLanguages = ['ja-Hrkt', 'ja', 'en'];
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -96,7 +97,12 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   //   return;
   // }
 
-  const { body, status } = await pokeApiClient.pokemon.get();
+  const query = {
+    offset: (req?.query?.offset as string) || '0',
+    limit: (req?.query?.limit as string) || '20',
+  };
+
+  const { body, status } = await pokeApiClient.pokemon.get({ query });
 
   if (status !== 200) res.status(status).json({ message: body });
 
@@ -116,7 +122,10 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(response);
 };
 
-const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler: NextApiHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<PokemonType[] | { message: string }>,
+) => {
   switch (req.method) {
     case 'GET':
       return handleGet(req, res);
