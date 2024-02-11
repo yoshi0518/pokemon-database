@@ -24,6 +24,7 @@
   "dependencies": {
     "@aspida/axios": "^1.14.0",
     "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.4",
     "@mantine/core": "^7.5.1",
     "@mantine/dates": "^7.5.1",

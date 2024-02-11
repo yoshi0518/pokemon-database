@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import type { Session } from 'next-auth';
 import type { ReactElement, ReactNode } from 'react';
 
 /**
@@ -12,12 +11,11 @@ import type { ReactElement, ReactNode } from 'react';
 declare module 'next' {
   type CustomNextPage<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode;
-    requireLogin?: boolean;
   };
 }
 
 declare module 'next/app' {
-  type CustomAppProps = AppProps<{ session: Session }> & {
+  type CustomAppProps = AppProps & {
     Component: CustomNextPage;
   };
 }
