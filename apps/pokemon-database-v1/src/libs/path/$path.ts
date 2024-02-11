@@ -1,10 +1,4 @@
 export const pagesPath = {
-  "login": {
-    $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/login' as const, hash: url?.hash })
-  },
-  "pokemon": {
-    $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/pokemon' as const, hash: url?.hash })
-  },
   $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/' as const, hash: url?.hash })
 };
 

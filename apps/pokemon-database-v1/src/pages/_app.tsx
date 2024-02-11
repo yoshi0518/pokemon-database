@@ -5,15 +5,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import { Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
-import { SessionProvider } from 'next-auth/react';
 import { initReactI18next } from 'react-i18next';
 import { z } from 'zod';
 import { zodI18nMap } from 'zod-i18n-map';
 
 import { NaNotifications } from '@/components/NaNotifications';
 import type { NaNotificationsProps } from '@/components/NaNotifications';
-
-import { LoginGuard } from '@/features/login/components/LoginGuard';
 
 import indexLocalesEn from '@/utils/i18n/locales/en/index.json';
 import zodLocalesEn from '@/utils/i18n/locales/en/zod.json';
@@ -70,7 +67,7 @@ const notificationsProps: NaNotificationsProps = {
   zIndex: 1000,
 };
 
-const App = ({ Component, pageProps: { session, ...pageProps } }: CustomAppProps) => {
+const App = ({ Component, pageProps }: CustomAppProps) => {
   const getLayout = Component.getLayout ?? ((page) => page);
   z.setErrorMap(zodI18nMap);
 
@@ -78,16 +75,8 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: CustomAppProps
     <>
       <div className={clsx('select-none p-2 text-sm', notoSansJp.className)}>
         <MantineProvider theme={mantineCustomTheme}>
-          <SessionProvider session={session}>
-            {Component.requireLogin ? (
-              <LoginGuard>
-                <Component {...pageProps} />
-              </LoginGuard>
-            ) : (
-              <Component {...pageProps} />
-            )}
-            <NaNotifications {...notificationsProps} />
-          </SessionProvider>
+          <Component {...pageProps} />
+          <NaNotifications {...notificationsProps} />
         </MantineProvider>
       </div>
       <Script src="/main.js" defer />
