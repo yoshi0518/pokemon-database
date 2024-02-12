@@ -15,6 +15,8 @@ export const PokemonGridPage = () => {
 
   console.log({ pokemonList });
 
+  const onClick = (id: string) => console.log({ id });
+
   return (
     <>
       <Head>
@@ -26,18 +28,17 @@ export const PokemonGridPage = () => {
           <li
             key={pokemon.id}
             className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow hover:shadow-xl"
+            onClick={() => onClick(String(pokemon.id))}
           >
             <div className="flex flex-1 flex-col p-8">
-              {'images' in pokemon && (
-                <Image
-                  className="mx-auto"
-                  width={128}
-                  height={128}
-                  src={`/images/${pokemon.images['default']}`}
-                  alt=""
-                />
-              )}
-              <h3 className="mt-6 text-sm font-medium text-gray-900">{pokemon.names['ja']}</h3>
+              <Image
+                className="mx-auto"
+                width={128}
+                height={128}
+                src={`/images/${pokemon.fileName}`}
+                alt={pokemon.name}
+              />
+              <h3 className="mt-6 text-sm font-medium text-gray-900">{pokemon.name}</h3>
               <div className="flex justify-between hover:bg-gray-50">
                 <div>Id</div>
                 <div className="text-right">{pokemon.id}</div>
@@ -54,7 +55,7 @@ export const PokemonGridPage = () => {
               </div>
               <div className="flex justify-between hover:bg-gray-50">
                 <div>Genera</div>
-                <div className="text-right">{pokemon.genera['ja']}</div>
+                <div className="text-right">{pokemon.genus}</div>
               </div>
             </div>
           </li>
