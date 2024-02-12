@@ -1,4 +1,4 @@
-import { PokemonType } from '../../@types';
+import { PokemonListType } from '@/libs/bffApi/@types';
 
 export type Methods = {
   get: {
@@ -7,6 +7,6 @@ export type Methods = {
       limit?: string;
     };
     status: 200;
-    resBody: PokemonType[];
+    resBody: PokemonListType[];
   };
 };

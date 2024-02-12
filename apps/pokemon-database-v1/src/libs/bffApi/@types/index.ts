@@ -1,20 +1,21 @@
-export type PokemonType = Partial<{
+export type PokemonListType = {
   id: number;
   name: string;
-  order: number;
+  fileName: string;
+  types: string[];
+  genus: string;
+};
+
+export type PokemonDetailType = {
+  id: number;
+  name: string;
+  fileName: string;
+  types: string[];
+  genus: string;
+  flavorText: string;
   height: number;
   weight: number;
   stats: {
-    'hp': number;
-    'attack': number;
-    'defense': number;
-    'special-attack': number;
-    'special-defense': number;
-    'speed': number;
+    [key: string]: number;
   };
-  types: string[];
-  names: { [key: string]: string }[];
-  genera: { [key: string]: string }[];
-  eggGroups: string[];
-  flavorTexts: { [key: string]: { [key: string]: string } };
-}>;
+};
