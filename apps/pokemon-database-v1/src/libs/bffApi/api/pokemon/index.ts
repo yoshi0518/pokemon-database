@@ -7,6 +7,6 @@ export type Methods = {
       size?: string;
     };
     status: 200;
-    resBody: PokemonListType[];
+    resBody: PokemonListType;
   };
 };

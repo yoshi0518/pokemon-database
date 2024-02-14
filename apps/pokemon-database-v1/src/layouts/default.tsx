@@ -15,7 +15,7 @@ const navigation = [
 export const DefaultLayout = ({ children }: { children: ReactElement }) => (
   <>
     <div className="flex h-screen flex-col">
-      <Disclosure as="nav" className="sticky top-0 bg-gray-800 ">
+      <Disclosure as="nav" className="sticky top-0 z-50 bg-gray-800">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

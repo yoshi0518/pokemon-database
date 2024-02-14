@@ -34,7 +34,7 @@ const getPokemon = async (id: string) => {
 
 export const handleGetList = async (
   req: NextApiRequest,
-  res: NextApiResponse<PokemonListType[] | { message: string }>,
+  res: NextApiResponse<PokemonListType | { message: string }>,
 ) => {
   const page = Number(req?.query?.page) || 1;
   const size = Number(req?.query?.size) || 20;
@@ -47,7 +47,7 @@ export const handleGetList = async (
 
   if (status !== 200) res.status(status).json({ message: 'API request failed' });
 
-  const response = [];
+  const data = [];
   for await (const pokemon of body.results) {
     const id = pokemon.url.split('/')[6];
 
@@ -57,8 +57,16 @@ export const handleGetList = async (
     const { pokemonSpeciesData, pokemonSpeciesStatus } = await getPokemonSpecies(id);
     if (pokemonSpeciesStatus !== 200) res.status(pokemonSpeciesStatus).json({ message: 'API request failed' });
 
-    response.push({ ...pokemonData, ...pokemonSpeciesData });
+    data.push({ ...pokemonData, ...pokemonSpeciesData });
   }
+
+  const response = {
+    count: body.count,
+    maxPage: Math.floor(body.count / size) + 1,
+    page,
+    size,
+    data,
+  };
 
   res.status(200).json(response);
 };

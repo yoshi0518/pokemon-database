@@ -1,9 +1,15 @@
 export type PokemonListType = {
-  id: number;
-  name: string;
-  fileName: string;
-  types: string[];
-  genus: string;
+  count: number;
+  maxPage: number;
+  page: number;
+  size: number;
+  data: {
+    id: number;
+    name: string;
+    fileName: string;
+    types: string[];
+    genus: string;
+  }[];
 };
 
 export type PokemonDetailType = {

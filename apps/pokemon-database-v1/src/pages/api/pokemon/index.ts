@@ -8,7 +8,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<PokemonListType[] | { message: string }>,
+  res: NextApiResponse<PokemonListType | { message: string }>,
 ) => {
   switch (req.method) {
     case 'GET':
