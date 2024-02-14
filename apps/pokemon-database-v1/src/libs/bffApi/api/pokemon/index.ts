@@ -3,8 +3,8 @@ import { PokemonListType } from '@/libs/bffApi/@types';
 export type Methods = {
   get: {
     query?: {
-      offset?: string;
-      limit?: string;
+      page?: string;
+      size?: string;
     };
     status: 200;
     resBody: PokemonListType[];
