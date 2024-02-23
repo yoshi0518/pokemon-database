@@ -1,21 +1,13 @@
-import axios from 'axios';
-
+import { pokeApiClient } from './libs/pokeApi';
 import { prisma } from './libs/prisma';
-
-import type { NamedAPIResourceListType } from './types';
-import type { AxiosResponse } from 'axios';
 
 const main = async () => {
   await prisma.$executeRaw`
-    truncate table t_pokemon;
+truncate table t_pokemon;
   `;
 
-  const response: AxiosResponse<NamedAPIResourceListType> = await axios.get('https://pokeapi.co/api/v2/pokemon');
-
-  console.log({
-    status: response.status,
-    data: JSON.stringify(response.data),
-  });
+  const { body } = await pokeApiClient.pokemon.get({ query: { offset: '40', limit: '20' } });
+  console.log({ ...body });
 };
 
 main()
