@@ -11,7 +11,6 @@ import { appTitle } from '@/config';
 
 import { useReadPokemonList } from '../hooks/useReadPokemonList';
 
-
 export const PokemonGridPage = () => {
   const title = `Grid | ${appTitle}`;
   const [pagination, setPagination] = useState<{

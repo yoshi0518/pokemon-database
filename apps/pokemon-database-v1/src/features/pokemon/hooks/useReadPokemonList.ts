@@ -5,7 +5,6 @@ import { middleDedupingInterval } from '@/config';
 import { pokemonKey } from './key';
 import { readPokemonList } from '../functions/readPokemonList';
 
-
 /** ポケモン一覧を取得 */
 export const useReadPokemonList = (page: string, size: string) => {
   const {

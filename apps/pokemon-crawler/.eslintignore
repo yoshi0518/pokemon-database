@@ -16,3 +16,6 @@ next-env.d.ts
 
 # prisma
 /prisma
+
+# aspida
+src/libs/pokeApi

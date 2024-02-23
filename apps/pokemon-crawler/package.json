@@ -5,7 +5,8 @@
   "private": true,
   "author": "yoshi0518",
   "scripts": {
-    "build": "tsc",
+    "watch": "aspida -c aspida-poke.config.js --watch",
+    "build": "aspida -c aspida-poke.config.js && tsc",
     "prisma:push": "prisma-import --force && prisma db push",
     "prisma:reset": "prisma migrate reset",
     "prisma:generate": "prisma generate",
@@ -14,6 +15,8 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
+    "@aspida/axios": "^1.14.0",
+    "aspida": "^1.14.0",
     "axios": "^1.6.7"
   },
   "devDependencies": {
