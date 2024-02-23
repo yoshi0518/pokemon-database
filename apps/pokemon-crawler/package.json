@@ -1,0 +1,40 @@
+{
+  "name": "@project/pokemon-crawler",
+  "description": "Pokemon Crawler",
+  "version": "1.0.0",
+  "private": true,
+  "author": "yoshi0518",
+  "scripts": {
+    "build": "tsc",
+    "prisma:push": "prisma-import --force && prisma db push",
+    "prisma:reset": "prisma migrate reset",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio",
+    "lint": "eslint --ext \".js,.ts\" --fix .",
+    "fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.10.2",
+    "@types/node": "^20.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "prettier": "^3.2.5",
+    "prisma": "^5.10.2",
+    "prisma-import": "^1.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "prisma": {
+    "import": {
+      "schemas": "./prisma/models/*.prisma",
+      "output": "./prisma/schema.prisma"
+    }
+  }
+}

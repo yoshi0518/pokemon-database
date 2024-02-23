@@ -1,0 +1,14 @@
+model Pokemon {
+  id Int @id
+  name String @unique @db.VarChar(500)
+  baseExperience Int? @map("base_experience")
+  height Int?
+  isDefault Boolean? @map("is_default")
+  order Int?
+  weight Int?
+  locationAreaEncounters String? @db.VarChar(500) @map("location_area_encounters")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@map("t_pokemon")
+}
