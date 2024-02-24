@@ -24,17 +24,55 @@ datasource db {
 // pokemon.prisma
 //
 
-model Pokemon {
-  id                     Int      @id
-  name                   String   @unique @db.VarChar(500)
-  baseExperience         Int?     @map("base_experience")
-  height                 Int?
-  isDefault              Boolean? @map("is_default")
-  order                  Int?
-  weight                 Int?
-  locationAreaEncounters String?  @map("location_area_encounters") @db.VarChar(500)
-  createdAt              DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
-  updatedAt              DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+model CrawlerEggGroup {
+  id            Int                    @id
+  name          String                 @db.VarChar(100)
+  createdAt     DateTime               @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt     DateTime               @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  eggGroupNames CrawlerEggGroupNames[]
 
-  @@map("t_pokemon")
+  @@map("t_crawler_egg_group")
+}
+
+model CrawlerEggGroupNames {
+  id        Int
+  language  String          @db.VarChar(100)
+  name      String          @db.VarChar(500)
+  createdAt DateTime        @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  eggGroup  CrawlerEggGroup @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_egg_group_names")
+}
+
+model CrawlerGender {
+  id        Int      @id
+  name      String   @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@map("t_crawler_gender")
+}
+
+model CrawlerGrowthRate {
+  id               Int                       @id
+  name             String                    @db.VarChar(500)
+  createdAt        DateTime                  @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt        DateTime                  @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  growthRateLebels CrawlerGrowthRateLevels[]
+
+  @@map("t_crawler_growth_rate")
+}
+
+model CrawlerGrowthRateLevels {
+  id         Int
+  level      Int               @db.SmallInt
+  experience Int
+  createdAt  DateTime          @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt  DateTime          @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  growthRate CrawlerGrowthRate @relation(fields: [id], references: [id])
+
+  @@id([id, level])
+  @@map("t_crawler_growth_rate_levels")
 }
