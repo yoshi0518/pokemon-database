@@ -6,6 +6,8 @@ import type { Methods as Methods_gsypk3 } from './gender';
 import type { Methods as Methods_njuqr1 } from './gender/_id@number';
 import type { Methods as Methods_5v1uhi } from './growth-rate';
 import type { Methods as Methods_9bkniq } from './growth-rate/_id@number';
+import type { Methods as Methods_edaidx } from './nature';
+import type { Methods as Methods_1enxcrb } from './nature/_id@number';
 import type { Methods as Methods_xncz6f } from './pokemon';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
@@ -13,7 +15,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH0 = '/egg-group';
   const PATH1 = '/gender';
   const PATH2 = '/growth-rate';
-  const PATH3 = '/pokemon';
+  const PATH3 = '/nature';
+  const PATH4 = '/pokemon';
   const GET = 'GET';
 
   return {
@@ -74,13 +77,32 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       $path: (option?: { method?: 'get' | undefined; query: Methods_5v1uhi['get']['query'] } | undefined) =>
         `${prefix}${PATH2}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
+    nature: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH3}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1enxcrb['get']['resBody'], BasicHeaders, Methods_1enxcrb['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1enxcrb['get']['resBody'], BasicHeaders, Methods_1enxcrb['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_edaidx['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_edaidx['get']['resBody'], BasicHeaders, Methods_edaidx['get']['status']>(prefix, PATH3, GET, option).json(),
+      $get: (option?: { query?: Methods_edaidx['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_edaidx['get']['resBody'], BasicHeaders, Methods_edaidx['get']['status']>(prefix, PATH3, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_edaidx['get']['query'] } | undefined) =>
+        `${prefix}${PATH3}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
     pokemon: {
       get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH3, GET, option).json(),
+        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH4, GET, option).json(),
       $get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH3, GET, option).json().then(r => r.body),
+        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH4, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_xncz6f['get']['query'] } | undefined) =>
-        `${prefix}${PATH3}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+        `${prefix}${PATH4}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
   };
 };

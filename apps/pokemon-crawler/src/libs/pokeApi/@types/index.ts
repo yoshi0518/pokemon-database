@@ -47,3 +47,28 @@ export type PokemonGrowthRateType = {
     experience: number;
   }[];
 };
+
+export type PokemonNatureType = {
+  id: number;
+  name: string;
+  decreased_stat: {
+    name: string;
+    url: string;
+  };
+  increased_stat: {
+    name: string;
+    url: string;
+  };
+  hates_flavor: {
+    name: string;
+    url: string;
+  };
+  likes_flavor: {
+    name: string;
+    url: string;
+  };
+  names: {
+    name: string;
+    language: LanguageType;
+  }[];
+};

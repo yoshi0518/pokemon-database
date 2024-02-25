@@ -7,7 +7,6 @@
   "scripts": {
     "aspida": "aspida -c aspida-poke.config.js",
     "crawler": "ts-node ./src/crawler.ts",
-    "build": "aspida -c aspida-poke.config.js && ts-node ./src/crawler.ts",
     "lint": "eslint --ext \".js,.ts\" --fix .",
     "fmt": "prettier --write ."
   },
