@@ -10,9 +10,6 @@ $ pnpm aspida
 
 # クローラー実行
 $ pnpm crawler
-
-# ビルド
-$ pnpm build
 ```
 
 ### Lint、Format
