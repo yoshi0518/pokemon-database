@@ -50,3 +50,29 @@ model CrawlerGrowthRateLevels {
   @@map("t_crawler_growth_rate_levels")
   @@id([id, level])
 }
+
+model CrawlerNature {
+  id Int @id
+  name String @db.VarChar(100)
+  decreased_stat String? @db.VarChar(100)
+  increased_stat String? @db.VarChar(100)
+  hates_flavor String? @db.VarChar(100)
+  likes_flavor String? @db.VarChar(100)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  natureNames CrawlerNatureNames[]
+
+  @@map("t_crawler_nature")
+}
+
+model CrawlerNatureNames {
+  id Int
+  language String @db.VarChar(100)
+  name String @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  nature CrawlerNature @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_nature_names")
+  @@id([id, language])
+}
