@@ -2,33 +2,25 @@
 
 ## How to Use
 
-### Init
+### Crawler
 
 ```bash
-# .env.sampleを複製し、ファイル名を.envに変更
+# Aspida定義更新
+$ pnpm aspida
 
-# DATABASE_URLを接続先DBに合わせて修正
+# クローラー実行
+$ pnpm crawler
+
+# ビルド
+$ pnpm build
 ```
 
-### Prisma
+### Lint、Format
 
 ```bash
-# Prisma初期化
-$ pnpm dlx prisma init
+# Lint
+$ pnpm lint
 
-# `prisma/models/base.prisma` のDB接続情報を修正
-
-# `prisma/models/xxx.prisma` を追加
-
-# マイグレーション適用
-$ pnpm prisma:push
-
-# Prismaクライアント更新
-$ pnpm prisma:generate
-
-# TypeScriptコンパイル
-$ pnpm build
-
-# Node処理実行
-$ node dist/xxx.js
+# Format
+$ pnpm fmt
 ```

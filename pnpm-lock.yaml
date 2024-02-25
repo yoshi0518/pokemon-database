@@ -20,6 +20,9 @@ importers:
       '@aspida/axios':
         specifier: ^1.14.0
         version: 1.14.0(aspida@1.14.0)(axios@1.6.7)
+      '@project/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       aspida:
         specifier: ^1.14.0
         version: 1.14.0
@@ -27,9 +30,6 @@ importers:
         specifier: ^1.6.7
         version: 1.6.7
     devDependencies:
-      '@prisma/client':
-        specifier: ^5.10.2
-        version: 5.10.2(prisma@5.10.2)
       '@types/node':
         specifier: ^20.11.17
         version: 20.11.17
@@ -54,12 +54,6 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
-      prisma:
-        specifier: ^5.10.2
-        version: 5.10.2
-      prisma-import:
-        specifier: ^1.0.5
-        version: 1.0.5
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.11.17)(typescript@5.3.3)
@@ -93,6 +87,9 @@ importers:
       '@mantine/notifications':
         specifier: ^7.5.1
         version: 7.5.1(@mantine/core@7.5.1)(@mantine/hooks@7.5.1)(react-dom@18.2.0)(react@18.2.0)
+      '@project/database':
+        specifier: workspace:^
+        version: link:../../packages/database
       aspida:
         specifier: ^1.14.0
         version: 1.14.0
@@ -241,6 +238,52 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
+  packages/database:
+    dependencies:
+      '@prisma/client':
+        specifier: ^5.10.2
+        version: 5.10.2(prisma@5.10.2)
+    devDependencies:
+      '@project/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^20.11.17
+        version: 20.11.17
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.21.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.21.0
+        version: 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.56.0
+      eslint-config-prettier:
+        specifier: ^9.1.0
+        version: 9.1.0(eslint@8.56.0)
+      eslint-plugin-import:
+        specifier: ^2.29.1
+        version: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)
+      eslint-plugin-unused-imports:
+        specifier: ^3.0.0
+        version: 3.0.0(@typescript-eslint/eslint-plugin@6.21.0)(eslint@8.56.0)
+      prettier:
+        specifier: ^3.2.5
+        version: 3.2.5
+      prisma:
+        specifier: ^5.10.2
+        version: 5.10.2
+      prisma-import:
+        specifier: ^1.0.5
+        version: 1.0.5
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.11.17)(typescript@5.3.3)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -2498,7 +2541,7 @@ packages:
         optional: true
     dependencies:
       prisma: 5.10.2
-    dev: true
+    dev: false
 
   /@prisma/debug@4.16.2:
     resolution: {integrity: sha512-7L7WbG0qNNZYgLpsVB8rCHCXEyHFyIycRlRDNwkVfjQmACC2OW6AWCYCbfdjQhkF/t7+S3njj8wAWAocSs+Brw==}
@@ -2512,11 +2555,9 @@ packages:
 
   /@prisma/debug@5.10.2:
     resolution: {integrity: sha512-bkBOmH9dpEBbMKFJj8V+Zp8IZHIBjy3fSyhLhxj4FmKGb/UBSt9doyfA6k1UeUREsMJft7xgPYBbHSOYBr8XCA==}
-    dev: true
 
   /@prisma/engines-version@5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9:
     resolution: {integrity: sha512-uCy/++3Jx/O3ufM+qv2H1L4tOemTNqcP/gyEVOlZqTpBvYJUe0tWtW0y3o2Ueq04mll4aM5X3f6ugQftOSLdFQ==}
-    dev: true
 
   /@prisma/engines@4.16.2:
     resolution: {integrity: sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==}
@@ -2531,7 +2572,6 @@ packages:
       '@prisma/engines-version': 5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9
       '@prisma/fetch-engine': 5.10.2
       '@prisma/get-platform': 5.10.2
-    dev: true
 
   /@prisma/fetch-engine@4.16.2:
     resolution: {integrity: sha512-lnCnHcOaNn0kw8qTJbVcNhyfIf5Lus2GFXbj3qpkdKEIB9xLgqkkuTP+35q1xFaqwQ0vy4HFpdRUpFP7njE15g==}
@@ -2564,7 +2604,6 @@ packages:
       '@prisma/debug': 5.10.2
       '@prisma/engines-version': 5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9
       '@prisma/get-platform': 5.10.2
-    dev: true
 
   /@prisma/generator-helper@4.16.2:
     resolution: {integrity: sha512-bMOH7y73Ui7gpQrioFeavMQA+Tf8ksaVf8Nhs9rQNzuSg8SSV6E9baczob0L5KGZTSgYoqnrRxuo03kVJYrnIg==}
@@ -2598,7 +2637,6 @@ packages:
     resolution: {integrity: sha512-nqXP6vHiY2PIsebBAuDeWiUYg8h8mfjBckHh6Jezuwej0QJNnjDiOq30uesmg+JXxGk99nqyG3B7wpcOODzXvg==}
     dependencies:
       '@prisma/debug': 5.10.2
-    dev: true
 
   /@prisma/internals@4.16.2:
     resolution: {integrity: sha512-/3OiSADA3RRgsaeEE+MDsBgL6oAMwddSheXn6wtYGUnjERAV/BmF5bMMLnTykesQqwZ1s8HrISrJ0Vf6cjOxMg==}
@@ -9109,7 +9147,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.10.2
-    dev: true
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

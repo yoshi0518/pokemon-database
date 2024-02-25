@@ -1,5 +1,6 @@
+import { prisma } from '@project/database';
+
 import { pokeApiClient } from './libs/pokeApi';
-import { prisma } from './libs/prisma';
 
 import type { QueryParamType } from './libs/pokeApi/@types';
 
@@ -32,7 +33,7 @@ const getGender = async (query?: QueryParamType) => {
   }
 };
 
-const main = async () => {
+export const main = async () => {
   await prisma.$executeRaw`
 truncate table t_crawler_gender;
   `;
