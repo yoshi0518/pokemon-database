@@ -1,0 +1,18 @@
+# dependencies
+/node_modules
+
+# build
+/dist
+
+# Local env files
+.env
+
+# Misc
+.DS_Store
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# prisma
+/prisma
