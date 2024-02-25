@@ -1,5 +1,6 @@
+import { prisma } from '@project/database';
+
 import { pokeApiClient } from './libs/pokeApi';
-import { prisma } from './libs/prisma';
 
 import type { QueryParamType } from './libs/pokeApi/@types';
 

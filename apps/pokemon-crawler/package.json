@@ -5,22 +5,19 @@
   "private": true,
   "author": "yoshi0518",
   "scripts": {
-    "watch": "aspida -c aspida-poke.config.js --watch",
-    "build": "aspida -c aspida-poke.config.js && tsc",
-    "prisma:push": "prisma-import --force && prisma db push",
-    "prisma:reset": "prisma migrate reset",
-    "prisma:generate": "prisma generate",
-    "prisma:studio": "prisma studio",
+    "aspida": "aspida -c aspida-poke.config.js",
+    "crawler": "ts-node ./src/crawler.ts",
+    "build": "aspida -c aspida-poke.config.js && ts-node ./src/crawler.ts",
     "lint": "eslint --ext \".js,.ts\" --fix .",
     "fmt": "prettier --write ."
   },
   "dependencies": {
     "@aspida/axios": "^1.14.0",
+    "@project/database": "workspace:*",
     "aspida": "^1.14.0",
     "axios": "^1.6.7"
   },
   "devDependencies": {
-    "@prisma/client": "^5.10.2",
     "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -29,15 +26,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "^3.2.5",
-    "prisma": "^5.10.2",
-    "prisma-import": "^1.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  },
-  "prisma": {
-    "import": {
-      "schemas": "./prisma/models/*.prisma",
-      "output": "./prisma/schema.prisma"
-    }
   }
 }
