@@ -10,6 +10,9 @@ $ pnpm aspida
 
 # クローラー実行
 $ pnpm crawler
+
+# 処理を個別実行
+$ pnpm ts-node src/crawler_xxx.ts
 ```
 
 ### Lint、Format
