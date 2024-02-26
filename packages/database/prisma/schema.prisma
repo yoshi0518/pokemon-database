@@ -166,15 +166,16 @@ model CrawlerGrowthRateLevels {
 }
 
 model CrawlerNature {
-  id             Int                  @id
-  name           String?              @db.VarChar(500)
-  decreased_stat String?              @db.VarChar(100)
-  increased_stat String?              @db.VarChar(100)
-  hates_flavor   String?              @db.VarChar(100)
-  likes_flavor   String?              @db.VarChar(100)
-  createdAt      DateTime             @default(dbgenerated("NOW(3)")) @map("created_at")
-  updatedAt      DateTime             @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
-  natureNames    CrawlerNatureNames[]
+  id                     Int                             @id
+  name                   String?                         @db.VarChar(500)
+  decreased_stat         String?                         @db.VarChar(100)
+  increased_stat         String?                         @db.VarChar(100)
+  hates_flavor           String?                         @db.VarChar(100)
+  likes_flavor           String?                         @db.VarChar(100)
+  createdAt              DateTime                        @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt              DateTime                        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  natureNames            CrawlerNatureNames[]
+  natureMoveBattleStyles CrawlerNatureMoveBattleStyles[]
 
   @@map("t_crawler_nature")
 }
@@ -189,4 +190,17 @@ model CrawlerNatureNames {
 
   @@id([id, language])
   @@map("t_crawler_nature_names")
+}
+
+model CrawlerNatureMoveBattleStyles {
+  id                 Int
+  name               String        @db.VarChar(500)
+  high_hp_preference Int?
+  low_hp_preference  Int?
+  createdAt          DateTime      @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt          DateTime      @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  nature             CrawlerNature @relation(fields: [id], references: [id])
+
+  @@id([id, name])
+  @@map("t_crawler_nature_move_battle_styles")
 }
