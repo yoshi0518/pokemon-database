@@ -50,6 +50,42 @@ model CrawlerAbilityFlavorText {
   @@id([id, language, versionGroup])
 }
 
+model CrawlerCharacteristics {
+  id Int @id
+  highest_stat String? @db.VarChar(500)
+  gene_modulo Int?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristicsDescriptions CrawlerCharacteristicsDescriptions[]
+  characteristicsPossibleValues CrawlerCharacteristicsPossibleValues[]
+
+  @@map("t_crawler_characteristics")
+}
+
+model CrawlerCharacteristicsDescriptions {
+  id Int
+  language String @db.VarChar(100)
+  description String? @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristics CrawlerCharacteristics @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_characteristics_descriptions")
+  @@id([id, language])
+}
+
+model CrawlerCharacteristicsPossibleValues {
+  id Int
+  row_no Int
+  possible_value Int?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristics CrawlerCharacteristics @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_characteristics_possible_values")
+  @@id([id, row_no])
+}
+
 model CrawlerEggGroup {
   id Int @id
   name String? @db.VarChar(500)
