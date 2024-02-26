@@ -94,6 +94,11 @@ export type PokemonNatureType = {
     name: string;
     url: string;
   };
+  move_battle_style_preferences: {
+    high_hp_preference: number;
+    low_hp_preference: number;
+    move_battle_style: NamedAPIResourceType;
+  }[];
   names: {
     name: string;
     language: NamedAPIResourceType;

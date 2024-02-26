@@ -9,6 +9,12 @@ type NatureNameType = {
   name: string;
 };
 
+type NatureMoveBattleStyleType = {
+  name: string;
+  high_hp_preference: number;
+  low_hp_preference: number;
+};
+
 const getNature = async (query?: QueryParamType) => {
   const { body } = await pokeApiClient.nature.get({ query });
   // console.log({ ...body });
@@ -36,6 +42,22 @@ const getNature = async (query?: QueryParamType) => {
     });
     // === NatureName End ===
 
+    // === NatureMoveBattleStyle Start ===
+    const natureMoveBattleStyleKey: string[] = [];
+    const natureMoveBattleStyleData: NatureMoveBattleStyleType[] = [];
+
+    body.move_battle_style_preferences.forEach((item) => {
+      if (natureMoveBattleStyleKey.includes(item.move_battle_style.name)) return;
+
+      natureMoveBattleStyleKey.push(item.move_battle_style.name);
+      natureMoveBattleStyleData.push({
+        name: item.move_battle_style.name,
+        high_hp_preference: item.high_hp_preference,
+        low_hp_preference: item.low_hp_preference,
+      });
+    });
+    // === NatureMoveBattleStyle End ===
+
     await prisma.crawlerNature.create({
       data: {
         id: body.id,
@@ -47,6 +69,11 @@ const getNature = async (query?: QueryParamType) => {
         natureNames: {
           createMany: {
             data: natureNameData,
+          },
+        },
+        natureMoveBattleStyles: {
+          createMany: {
+            data: natureMoveBattleStyleData,
           },
         },
       },
