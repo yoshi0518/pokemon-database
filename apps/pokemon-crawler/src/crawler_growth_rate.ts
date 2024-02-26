@@ -4,6 +4,11 @@ import { pokeApiClient } from './libs/pokeApi';
 
 import type { QueryParamType } from './libs/pokeApi/@types';
 
+type GrowthRateLevelType = {
+  level: number;
+  experience: number;
+};
+
 const getGrowthRate = async (query?: QueryParamType) => {
   const { body } = await pokeApiClient.growth_rate.get({ query });
   // console.log({ ...body });
@@ -13,7 +18,23 @@ const getGrowthRate = async (query?: QueryParamType) => {
   for await (const result of body.results) {
     const id = Number(result.url.split('/')[6]);
     const { body } = await pokeApiClient.growth_rate._id(id).get();
-    // console.log({ ...body });
+
+    console.info(`\n=== GrowthRate: ${id} ===`);
+
+    // === GrowthRateLevel Start ===
+    const growthRateLevelKey: number[] = [];
+    const growthRateLevelData: GrowthRateLevelType[] = [];
+
+    body.levels.forEach((item) => {
+      if (growthRateLevelKey.includes(item.level)) return;
+
+      growthRateLevelKey.push(item.level);
+      growthRateLevelData.push({
+        level: item.level,
+        experience: item.experience,
+      });
+    });
+    // === GrowthRateLevel End ===
 
     await prisma.crawlerGrowthRate.create({
       data: {
@@ -21,7 +42,7 @@ const getGrowthRate = async (query?: QueryParamType) => {
         name: body.name,
         growthRateLebels: {
           createMany: {
-            data: body.levels,
+            data: growthRateLevelData,
           },
         },
       },
