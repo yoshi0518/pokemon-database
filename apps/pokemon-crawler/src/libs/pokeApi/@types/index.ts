@@ -20,6 +20,37 @@ export type LanguageType = {
   url: string;
 };
 
+export type GenerationType = {
+  name: string;
+  url: string;
+};
+
+export type VersionGroupType = {
+  name: string;
+  url: string;
+};
+
+export type PokemonAbilityType = {
+  id: number;
+  name: string;
+  generation: GenerationType;
+  is_main_series: boolean;
+  names: {
+    name: string;
+    language: LanguageType;
+  }[];
+  effect_entries: {
+    effect: string;
+    short_effect: string;
+    language: LanguageType;
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: LanguageType;
+    version_group: VersionGroupType;
+  }[];
+};
+
 export type PokemonEggGroupType = {
   id: number;
   name: string;
