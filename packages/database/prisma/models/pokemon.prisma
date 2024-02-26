@@ -1,3 +1,53 @@
+model CrawlerAbility {
+  id Int @id
+  name String? @db.VarChar(500)
+  generation String? @db.VarChar(100)
+  is_main_series Boolean?
+  abilityNames CrawlerAbilityNames[]
+  abilityEffect CrawlerAbilityEffect[]
+  abilityFlavorText CrawlerAbilityFlavorText[]
+
+  @@map("t_crawler_ability")
+}
+
+model CrawlerAbilityNames {
+  id Int
+  language String @db.VarChar(100)
+  name String? @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_names")
+  @@id([id, language])
+}
+
+model CrawlerAbilityEffect {
+  id Int
+  language String @db.VarChar(100)
+  effect String? @db.Text
+  shortEffect String? @db.VarChar(500) @map("short_effect")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_effect")
+  @@id([id, language])
+}
+
+model CrawlerAbilityFlavorText {
+  id Int
+  language String @db.VarChar(100)
+  versionGroup String @db.VarChar(100) @map("version_group")
+  flavorText String? @db.VarChar(500) @map("flavor_text")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_flavor_text")
+  @@id([id, language, versionGroup])
+}
+
 model CrawlerEggGroup {
   id Int @id
   name String @db.VarChar(100)

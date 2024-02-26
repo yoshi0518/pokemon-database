@@ -24,6 +24,56 @@ datasource db {
 // pokemon.prisma
 //
 
+model CrawlerAbility {
+  id                Int                        @id
+  name              String?                    @db.VarChar(500)
+  generation        String?                    @db.VarChar(100)
+  is_main_series    Boolean?
+  abilityNames      CrawlerAbilityNames[]
+  abilityEffect     CrawlerAbilityEffect[]
+  abilityFlavorText CrawlerAbilityFlavorText[]
+
+  @@map("t_crawler_ability")
+}
+
+model CrawlerAbilityNames {
+  id        Int
+  language  String         @db.VarChar(100)
+  name      String?        @db.VarChar(500)
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability   CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_ability_names")
+}
+
+model CrawlerAbilityEffect {
+  id          Int
+  language    String         @db.VarChar(100)
+  effect      String?        @db.Text
+  shortEffect String?        @map("short_effect") @db.VarChar(500)
+  createdAt   DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt   DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability     CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_ability_effect")
+}
+
+model CrawlerAbilityFlavorText {
+  id           Int
+  language     String         @db.VarChar(100)
+  versionGroup String         @map("version_group") @db.VarChar(100)
+  flavorText   String?        @map("flavor_text") @db.VarChar(500)
+  createdAt    DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt    DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability      CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@id([id, language, versionGroup])
+  @@map("t_crawler_ability_flavor_text")
+}
+
 model CrawlerEggGroup {
   id            Int                    @id
   name          String                 @db.VarChar(100)
