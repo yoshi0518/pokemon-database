@@ -15,9 +15,36 @@ export type NamedAPIResourceListType = {
   results: NamedAPIResourceType[];
 };
 
-export type LanguageType = {
+export type PokemonAbilityType = {
+  id: number;
   name: string;
-  url: string;
+  generation: NamedAPIResourceType;
+  is_main_series: boolean;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  effect_entries: {
+    effect: string;
+    short_effect: string;
+    language: NamedAPIResourceType;
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: NamedAPIResourceType;
+    version_group: NamedAPIResourceType;
+  }[];
+};
+
+export type PokemonCharacteristicsType = {
+  id: number;
+  highest_stat: NamedAPIResourceType;
+  gene_modulo: number;
+  descriptions: {
+    description: string;
+    language: NamedAPIResourceType;
+  }[];
+  possible_values: number[];
 };
 
 export type PokemonEggGroupType = {
@@ -25,7 +52,7 @@ export type PokemonEggGroupType = {
   name: string;
   names: {
     name: string;
-    language: LanguageType;
+    language: NamedAPIResourceType;
   }[];
 };
 
@@ -69,6 +96,6 @@ export type PokemonNatureType = {
   };
   names: {
     name: string;
-    language: LanguageType;
+    language: NamedAPIResourceType;
   }[];
 };

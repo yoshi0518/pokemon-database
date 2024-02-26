@@ -1,6 +1,94 @@
+model CrawlerAbility {
+  id Int @id
+  name String? @db.VarChar(500)
+  generation String? @db.VarChar(100)
+  is_main_series Boolean?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  abilityNames CrawlerAbilityNames[]
+  abilityEffect CrawlerAbilityEffect[]
+  abilityFlavorText CrawlerAbilityFlavorText[]
+
+  @@map("t_crawler_ability")
+}
+
+model CrawlerAbilityNames {
+  id Int
+  language String @db.VarChar(100)
+  name String? @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_names")
+  @@id([id, language])
+}
+
+model CrawlerAbilityEffect {
+  id Int
+  language String @db.VarChar(100)
+  effect String? @db.Text
+  shortEffect String? @db.VarChar(500) @map("short_effect")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_effect")
+  @@id([id, language])
+}
+
+model CrawlerAbilityFlavorText {
+  id Int
+  language String @db.VarChar(100)
+  versionGroup String @db.VarChar(100) @map("version_group")
+  flavorText String? @db.VarChar(500) @map("flavor_text")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  ability CrawlerAbility @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_ability_flavor_text")
+  @@id([id, language, versionGroup])
+}
+
+model CrawlerCharacteristics {
+  id Int @id
+  highest_stat String? @db.VarChar(500)
+  gene_modulo Int?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristicsDescriptions CrawlerCharacteristicsDescriptions[]
+  characteristicsPossibleValues CrawlerCharacteristicsPossibleValues[]
+
+  @@map("t_crawler_characteristics")
+}
+
+model CrawlerCharacteristicsDescriptions {
+  id Int
+  language String @db.VarChar(100)
+  description String? @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristics CrawlerCharacteristics @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_characteristics_descriptions")
+  @@id([id, language])
+}
+
+model CrawlerCharacteristicsPossibleValues {
+  id Int
+  row_no Int
+  possible_value Int?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  characteristics CrawlerCharacteristics @relation(fields: [id], references: [id])
+
+  @@map("t_crawler_characteristics_possible_values")
+  @@id([id, row_no])
+}
+
 model CrawlerEggGroup {
   id Int @id
-  name String @db.VarChar(100)
+  name String? @db.VarChar(500)
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   eggGroupNames CrawlerEggGroupNames[]
@@ -11,7 +99,7 @@ model CrawlerEggGroup {
 model CrawlerEggGroupNames {
   id Int
   language String @db.VarChar(100)
-  name String @db.VarChar(500)
+  name String? @db.VarChar(500)
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   eggGroup CrawlerEggGroup @relation(fields: [id], references: [id])
@@ -22,7 +110,7 @@ model CrawlerEggGroupNames {
 
 model CrawlerGender {
   id Int @id
-  name String @db.VarChar(500)
+  name String? @db.VarChar(500)
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
 
@@ -31,7 +119,7 @@ model CrawlerGender {
 
 model CrawlerGrowthRate {
   id Int @id
-  name String @db.VarChar(500)
+  name String? @db.VarChar(500)
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   growthRateLebels CrawlerGrowthRateLevels[]
@@ -42,7 +130,7 @@ model CrawlerGrowthRate {
 model CrawlerGrowthRateLevels {
   id Int
   level Int @db.SmallInt
-  experience Int
+  experience Int?
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   growthRate CrawlerGrowthRate @relation(fields: [id], references: [id])
@@ -53,7 +141,7 @@ model CrawlerGrowthRateLevels {
 
 model CrawlerNature {
   id Int @id
-  name String @db.VarChar(100)
+  name String? @db.VarChar(500)
   decreased_stat String? @db.VarChar(100)
   increased_stat String? @db.VarChar(100)
   hates_flavor String? @db.VarChar(100)
@@ -68,7 +156,7 @@ model CrawlerNature {
 model CrawlerNatureNames {
   id Int
   language String @db.VarChar(100)
-  name String @db.VarChar(500)
+  name String? @db.VarChar(500)
   createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   nature CrawlerNature @relation(fields: [id], references: [id])

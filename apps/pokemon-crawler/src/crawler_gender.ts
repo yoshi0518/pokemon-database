@@ -13,7 +13,8 @@ const getGender = async (query?: QueryParamType) => {
   for await (const result of body.results) {
     const id = Number(result.url.split('/')[6]);
     const { body } = await pokeApiClient.gender._id(id).get();
-    // console.log({ ...body });
+
+    console.info(`\n=== Gender: ${id} ===`);
 
     await prisma.crawlerGender.create({
       data: {
