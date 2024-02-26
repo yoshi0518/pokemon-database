@@ -4,6 +4,11 @@ import { pokeApiClient } from './libs/pokeApi';
 
 import type { QueryParamType } from './libs/pokeApi/@types';
 
+type NatureNameType = {
+  language: string;
+  name: string;
+};
+
 const getNature = async (query?: QueryParamType) => {
   const { body } = await pokeApiClient.nature.get({ query });
   // console.log({ ...body });
@@ -13,7 +18,23 @@ const getNature = async (query?: QueryParamType) => {
   for await (const result of body.results) {
     const id = Number(result.url.split('/')[6]);
     const { body } = await pokeApiClient.nature._id(id).get();
-    // console.log({ ...body });
+
+    console.info(`\n=== Nature: ${id} ===`);
+
+    // === NatureName Start ===
+    const natureNameKey: string[] = [];
+    const natureNameData: NatureNameType[] = [];
+
+    body.names.forEach((item) => {
+      if (natureNameKey.includes(item.language.name)) return;
+
+      natureNameKey.push(item.language.name);
+      natureNameData.push({
+        language: item.language.name,
+        name: item.name,
+      });
+    });
+    // === NatureName End ===
 
     await prisma.crawlerNature.create({
       data: {
@@ -25,7 +46,7 @@ const getNature = async (query?: QueryParamType) => {
         likes_flavor: body.likes_flavor ? body.likes_flavor.name : null,
         natureNames: {
           createMany: {
-            data: body.names.map((item) => ({ language: item.language.name, name: item.name })),
+            data: natureNameData,
           },
         },
       },
