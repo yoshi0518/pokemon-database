@@ -28,7 +28,7 @@ model CrawlerAbility {
   id                Int                        @id
   name              String?                    @db.VarChar(500)
   generation        String?                    @db.VarChar(100)
-  is_main_series    Boolean?
+  isMainSeries      Boolean?                   @map("is_main_series")
   createdAt         DateTime                   @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt         DateTime                   @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   abilityNames      CrawlerAbilityNames[]
@@ -78,8 +78,8 @@ model CrawlerAbilityFlavorText {
 
 model CrawlerCharacteristics {
   id                            Int                                    @id
-  highest_stat                  String?                                @db.VarChar(500)
-  gene_modulo                   Int?
+  highestStat                   String?                                @map("highest_stat") @db.VarChar(500)
+  geneModulo                    Int?                                   @map("gene_modulo")
   createdAt                     DateTime                               @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt                     DateTime                               @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   characteristicsDescriptions   CrawlerCharacteristicsDescriptions[]
@@ -102,13 +102,13 @@ model CrawlerCharacteristicsDescriptions {
 
 model CrawlerCharacteristicsPossibleValues {
   id              Int
-  row_no          Int
-  possible_value  Int?
+  rowNo           Int                    @map("row_no")
+  possibleValue   Int?                   @map("possible_value")
   createdAt       DateTime               @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt       DateTime               @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   characteristics CrawlerCharacteristics @relation(fields: [id], references: [id])
 
-  @@id([id, row_no])
+  @@id([id, rowNo])
   @@map("t_crawler_characteristics_possible_values")
 }
 
@@ -168,10 +168,10 @@ model CrawlerGrowthRateLevels {
 model CrawlerNature {
   id                     Int                             @id
   name                   String?                         @db.VarChar(500)
-  decreased_stat         String?                         @db.VarChar(100)
-  increased_stat         String?                         @db.VarChar(100)
-  hates_flavor           String?                         @db.VarChar(100)
-  likes_flavor           String?                         @db.VarChar(100)
+  decreasedStat          String?                         @map("decreased_stat") @db.VarChar(100)
+  increasedStat          String?                         @map("increased_stat") @db.VarChar(100)
+  hatesFlavor            String?                         @map("hates_flavor") @db.VarChar(100)
+  likesFlavor            String?                         @map("likes_flavor") @db.VarChar(100)
   createdAt              DateTime                        @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt              DateTime                        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   natureNames            CrawlerNatureNames[]
@@ -193,13 +193,13 @@ model CrawlerNatureNames {
 }
 
 model CrawlerNatureMoveBattleStyles {
-  id                 Int
-  name               String        @db.VarChar(500)
-  high_hp_preference Int?
-  low_hp_preference  Int?
-  createdAt          DateTime      @default(dbgenerated("NOW(3)")) @map("created_at")
-  updatedAt          DateTime      @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
-  nature             CrawlerNature @relation(fields: [id], references: [id])
+  id               Int
+  name             String        @db.VarChar(500)
+  highHpPreference Int?          @map("high_hp_preference")
+  lowHpPreference  Int?          @map("low_hp_preference")
+  createdAt        DateTime      @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt        DateTime      @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  nature           CrawlerNature @relation(fields: [id], references: [id])
 
   @@id([id, name])
   @@map("t_crawler_nature_move_battle_styles")
