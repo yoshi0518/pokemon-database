@@ -178,3 +178,51 @@ model CrawlerNatureMoveBattleStyles {
   @@id([id, name])
   @@map("t_crawler_nature_move_battle_styles")
 }
+
+model CrawlerPokeathlonStat {
+  id                                     Int                                             @id
+  name                                   String?                                         @db.VarChar(500)
+  createdAt                              DateTime                                        @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                              DateTime                                        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokeathlonStatNames                    CrawlerPokeathlonStatNames[]
+  pokeathlonStatAffectingNaturesDecrease CrawlerPokeathlonStatAffectingNaturesDecrease[]
+  pokeathlonStatAffectingNaturesIncrease CrawlerPokeathlonStatAffectingNaturesIncrease[]
+
+  @@map("t_crawler_pokeathlon_stat")
+}
+
+model CrawlerPokeathlonStatNames {
+  id             Int
+  language       String                @db.VarChar(100)
+  name           String?               @db.VarChar(500)
+  createdAt      DateTime              @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt      DateTime              @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokeathlonStat CrawlerPokeathlonStat @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokeathlon_stat_names")
+}
+
+model CrawlerPokeathlonStatAffectingNaturesDecrease {
+  id             Int
+  name           String                @db.VarChar(500)
+  maxChange      Int?                  @map("max_change")
+  createdAt      DateTime              @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt      DateTime              @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokeathlonStat CrawlerPokeathlonStat @relation(fields: [id], references: [id])
+
+  @@id([id, name])
+  @@map("t_crawler_pokeathlon_stat_affecting_natures_decrease")
+}
+
+model CrawlerPokeathlonStatAffectingNaturesIncrease {
+  id             Int
+  name           String                @db.VarChar(500)
+  maxChange      Int?                  @map("max_change")
+  createdAt      DateTime              @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt      DateTime              @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokeathlonStat CrawlerPokeathlonStat @relation(fields: [id], references: [id])
+
+  @@id([id, name])
+  @@map("t_crawler_pokeathlon_stat_affecting_natures_increase")
+}
