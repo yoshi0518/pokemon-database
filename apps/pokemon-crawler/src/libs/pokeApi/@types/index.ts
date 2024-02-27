@@ -154,3 +154,30 @@ export type PokemonShapeType = {
     language: NamedAPIResourceType;
   }[];
 };
+
+export type PokemonStatType = {
+  id: number;
+  name: string;
+  move_damage_class: NamedAPIResourceType;
+  is_battle_only: boolean;
+  game_index: number;
+  affecting_moves: {
+    decrease: {
+      change: number;
+      move: NamedAPIResourceType;
+    }[];
+    increase: {
+      change: number;
+      move: NamedAPIResourceType;
+    }[];
+  };
+  affecting_natures: {
+    decrease: NamedAPIResourceType[];
+    increase: NamedAPIResourceType[];
+  };
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  characteristics: { url: string }[];
+};
