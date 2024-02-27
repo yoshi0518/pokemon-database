@@ -132,3 +132,12 @@ export type PokemonColorType = {
     language: NamedAPIResourceType;
   }[];
 };
+
+export type PokemonHabitatType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+};

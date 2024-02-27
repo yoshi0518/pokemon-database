@@ -17,6 +17,8 @@ import type { Methods as Methods_ra7nqg } from './pokeathlon-stat/_id@number';
 import type { Methods as Methods_xncz6f } from './pokemon';
 import type { Methods as Methods_2hlju9 } from './pokemon-color';
 import type { Methods as Methods_1hv6hpf } from './pokemon-color/_id@number';
+import type { Methods as Methods_5efco1 } from './pokemon-habitat';
+import type { Methods as Methods_1ow74pf } from './pokemon-habitat/_id@number';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://pokeapi.co/api/v2' : baseURL).replace(/\/$/, '');
@@ -29,6 +31,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH6 = '/pokeathlon-stat';
   const PATH7 = '/pokemon';
   const PATH8 = '/pokemon-color';
+  const PATH9 = '/pokemon-habitat';
   const GET = 'GET';
 
   return {
@@ -191,6 +194,25 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         fetch<Methods_2hlju9['get']['resBody'], BasicHeaders, Methods_2hlju9['get']['status']>(prefix, PATH8, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_2hlju9['get']['query'] } | undefined) =>
         `${prefix}${PATH8}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    pokemon_habitat: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH9}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ow74pf['get']['resBody'], BasicHeaders, Methods_1ow74pf['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ow74pf['get']['resBody'], BasicHeaders, Methods_1ow74pf['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_5efco1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_5efco1['get']['resBody'], BasicHeaders, Methods_5efco1['get']['status']>(prefix, PATH9, GET, option).json(),
+      $get: (option?: { query?: Methods_5efco1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_5efco1['get']['resBody'], BasicHeaders, Methods_5efco1['get']['status']>(prefix, PATH9, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_5efco1['get']['query'] } | undefined) =>
+        `${prefix}${PATH9}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
   };
 };
