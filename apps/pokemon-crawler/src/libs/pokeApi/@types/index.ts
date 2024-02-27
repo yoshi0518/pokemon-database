@@ -104,3 +104,22 @@ export type PokemonNatureType = {
     language: NamedAPIResourceType;
   }[];
 };
+
+export type PokemonPokeathlonStatType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  affecting_natures: {
+    decrease: {
+      max_change: number;
+      nature: NamedAPIResourceType;
+    }[];
+    increase: {
+      max_change: number;
+      nature: NamedAPIResourceType;
+    }[];
+  };
+};
