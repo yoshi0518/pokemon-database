@@ -141,3 +141,16 @@ export type PokemonHabitatType = {
     language: NamedAPIResourceType;
   }[];
 };
+
+export type PokemonShapeType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  awesome_names: {
+    awesome_name: string;
+    language: NamedAPIResourceType;
+  }[];
+};
