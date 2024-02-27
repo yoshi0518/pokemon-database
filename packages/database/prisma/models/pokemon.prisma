@@ -248,3 +248,25 @@ model CrawlerPokemonColorNames {
   @@id([id, language])
   @@map("t_crawler_pokemon_color_names")
 }
+
+model CrawlerPokemonHabitat {
+  id                  Int                          @id
+  name                String?                      @db.VarChar(500)
+  createdAt           DateTime                     @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt           DateTime                     @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonHabitatNames CrawlerPokemonHabitatNames[]
+
+  @@map("t_crawler_pokemon_habitat")
+}
+
+model CrawlerPokemonHabitatNames {
+  id             Int
+  language       String                @db.VarChar(100)
+  name           String?               @db.VarChar(500)
+  createdAt      DateTime              @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt      DateTime              @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonHabitat CrawlerPokemonHabitat @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_habitat_names")
+}
