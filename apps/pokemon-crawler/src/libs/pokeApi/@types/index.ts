@@ -123,3 +123,12 @@ export type PokemonPokeathlonStatType = {
     }[];
   };
 };
+
+export type PokemonColorType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+};
