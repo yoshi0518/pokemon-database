@@ -1,10 +1,12 @@
-# Turborepo ＋ TailwindCSS Template
+# Pokemon Database
 
 ## アプリ・パッケージ一覧
 
 | ディレクトリ               | 内容                 |
 | -------------------------- | -------------------- |
-| apps/app_xx                | Next.js              |
+| apps/pokemon-crawler       | Pokemon Crawler      |
+| apps/pokemon-database-v1   | Pokemon DB(v1)       |
+| packages/database          | Prisma共通設定       |
 | packages/eslint-config     | ESLint 共通設定      |
 | packages/prettier-config   | Prettier 共通設定    |
 | packages/tailwind-config   | TailwindCSS 共通設定 |
@@ -15,11 +17,8 @@
 ### 環境準備
 
 ```bash
-# テンプレートリポジトリから作業リポジトリを生成
-# Github => Use this template => Create a new repository
-
 # 作業リポジトリをクローン
-$ git clone git@github.com:yoshi0518/xxxxx.git
+$ git clone git@github.com:yoshi0518/pokemon-database.git
 
 # インストール
 $ pnpm i

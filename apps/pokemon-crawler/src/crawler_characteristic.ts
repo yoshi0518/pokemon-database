@@ -38,16 +38,16 @@ const getCharacteristics = async (query?: QueryParamType) => {
 
     // === CharacteristicsPossibleValue Start ===
     const characteristicsPossibleValueData = body.possible_values.map((possibleValue, index) => ({
-      row_no: index,
-      possible_value: possibleValue,
+      rowNo: index,
+      possibleValue: possibleValue,
     }));
     // === CharacteristicsPossibleValue End ===
 
     await prisma.crawlerCharacteristics.create({
       data: {
         id: body.id,
-        highest_stat: body.highest_stat.name,
-        gene_modulo: body.gene_modulo,
+        highestStat: body.highest_stat.name,
+        geneModulo: body.gene_modulo,
         characteristicsDescriptions: {
           createMany: {
             data: characteristicsDescriptionData,

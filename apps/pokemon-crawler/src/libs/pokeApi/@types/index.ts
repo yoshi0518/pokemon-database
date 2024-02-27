@@ -94,8 +94,90 @@ export type PokemonNatureType = {
     name: string;
     url: string;
   };
+  move_battle_style_preferences: {
+    high_hp_preference: number;
+    low_hp_preference: number;
+    move_battle_style: NamedAPIResourceType;
+  }[];
   names: {
     name: string;
     language: NamedAPIResourceType;
   }[];
+};
+
+export type PokemonPokeathlonStatType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  affecting_natures: {
+    decrease: {
+      max_change: number;
+      nature: NamedAPIResourceType;
+    }[];
+    increase: {
+      max_change: number;
+      nature: NamedAPIResourceType;
+    }[];
+  };
+};
+
+export type PokemonColorType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+};
+
+export type PokemonHabitatType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+};
+
+export type PokemonShapeType = {
+  id: number;
+  name: string;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  awesome_names: {
+    awesome_name: string;
+    language: NamedAPIResourceType;
+  }[];
+};
+
+export type PokemonStatType = {
+  id: number;
+  name: string;
+  move_damage_class: NamedAPIResourceType;
+  is_battle_only: boolean;
+  game_index: number;
+  affecting_moves: {
+    decrease: {
+      change: number;
+      move: NamedAPIResourceType;
+    }[];
+    increase: {
+      change: number;
+      move: NamedAPIResourceType;
+    }[];
+  };
+  affecting_natures: {
+    decrease: NamedAPIResourceType[];
+    increase: NamedAPIResourceType[];
+  };
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  characteristics: { url: string }[];
 };

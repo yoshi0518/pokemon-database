@@ -9,6 +9,12 @@ type NatureNameType = {
   name: string;
 };
 
+type NatureMoveBattleStyleType = {
+  name: string;
+  highHpPreference: number;
+  lowHpPreference: number;
+};
+
 const getNature = async (query?: QueryParamType) => {
   const { body } = await pokeApiClient.nature.get({ query });
   // console.log({ ...body });
@@ -36,17 +42,38 @@ const getNature = async (query?: QueryParamType) => {
     });
     // === NatureName End ===
 
+    // === NatureMoveBattleStyle Start ===
+    const natureMoveBattleStyleKey: string[] = [];
+    const natureMoveBattleStyleData: NatureMoveBattleStyleType[] = [];
+
+    body.move_battle_style_preferences.forEach((item) => {
+      if (natureMoveBattleStyleKey.includes(item.move_battle_style.name)) return;
+
+      natureMoveBattleStyleKey.push(item.move_battle_style.name);
+      natureMoveBattleStyleData.push({
+        name: item.move_battle_style.name,
+        highHpPreference: item.high_hp_preference,
+        lowHpPreference: item.low_hp_preference,
+      });
+    });
+    // === NatureMoveBattleStyle End ===
+
     await prisma.crawlerNature.create({
       data: {
         id: body.id,
         name: body.name,
-        decreased_stat: body.decreased_stat ? body.decreased_stat.name : null,
-        increased_stat: body.increased_stat ? body.increased_stat.name : null,
-        hates_flavor: body.hates_flavor ? body.hates_flavor.name : null,
-        likes_flavor: body.likes_flavor ? body.likes_flavor.name : null,
+        decreasedStat: body.decreased_stat ? body.decreased_stat.name : null,
+        increasedStat: body.increased_stat ? body.increased_stat.name : null,
+        hatesFlavor: body.hates_flavor ? body.hates_flavor.name : null,
+        likesFlavor: body.likes_flavor ? body.likes_flavor.name : null,
         natureNames: {
           createMany: {
             data: natureNameData,
+          },
+        },
+        natureMoveBattleStyles: {
+          createMany: {
+            data: natureMoveBattleStyleData,
           },
         },
       },
@@ -70,6 +97,10 @@ truncate table t_crawler_nature;
 
   await prisma.$executeRaw`
 truncate table t_crawler_nature_names;
+  `;
+
+  await prisma.$executeRaw`
+truncate table t_crawler_nature_move_battle_styles;
   `;
 
   await getNature();

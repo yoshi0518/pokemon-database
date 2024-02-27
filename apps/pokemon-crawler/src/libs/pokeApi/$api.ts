@@ -12,7 +12,17 @@ import type { Methods as Methods_5v1uhi } from './growth-rate';
 import type { Methods as Methods_9bkniq } from './growth-rate/_id@number';
 import type { Methods as Methods_edaidx } from './nature';
 import type { Methods as Methods_1enxcrb } from './nature/_id@number';
+import type { Methods as Methods_10ps824 } from './pokeathlon-stat';
+import type { Methods as Methods_ra7nqg } from './pokeathlon-stat/_id@number';
 import type { Methods as Methods_xncz6f } from './pokemon';
+import type { Methods as Methods_2hlju9 } from './pokemon-color';
+import type { Methods as Methods_1hv6hpf } from './pokemon-color/_id@number';
+import type { Methods as Methods_5efco1 } from './pokemon-habitat';
+import type { Methods as Methods_1ow74pf } from './pokemon-habitat/_id@number';
+import type { Methods as Methods_1ethz6z } from './pokemon-shape';
+import type { Methods as Methods_dkwstx } from './pokemon-shape/_id@number';
+import type { Methods as Methods_18euguo } from './stat';
+import type { Methods as Methods_l61cak } from './stat/_id@number';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://pokeapi.co/api/v2' : baseURL).replace(/\/$/, '');
@@ -22,7 +32,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH3 = '/gender';
   const PATH4 = '/growth-rate';
   const PATH5 = '/nature';
-  const PATH6 = '/pokemon';
+  const PATH6 = '/pokeathlon-stat';
+  const PATH7 = '/pokemon';
+  const PATH8 = '/pokemon-color';
+  const PATH9 = '/pokemon-habitat';
+  const PATH10 = '/pokemon-shape';
+  const PATH11 = '/stat';
   const GET = 'GET';
 
   return {
@@ -140,13 +155,108 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       $path: (option?: { method?: 'get' | undefined; query: Methods_edaidx['get']['query'] } | undefined) =>
         `${prefix}${PATH5}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
+    pokeathlon_stat: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH6}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_ra7nqg['get']['resBody'], BasicHeaders, Methods_ra7nqg['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_ra7nqg['get']['resBody'], BasicHeaders, Methods_ra7nqg['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_10ps824['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_10ps824['get']['resBody'], BasicHeaders, Methods_10ps824['get']['status']>(prefix, PATH6, GET, option).json(),
+      $get: (option?: { query?: Methods_10ps824['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_10ps824['get']['resBody'], BasicHeaders, Methods_10ps824['get']['status']>(prefix, PATH6, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_10ps824['get']['query'] } | undefined) =>
+        `${prefix}${PATH6}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
     pokemon: {
       get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH6, GET, option).json(),
+        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH7, GET, option).json(),
       $get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH6, GET, option).json().then(r => r.body),
+        fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH7, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_xncz6f['get']['query'] } | undefined) =>
-        `${prefix}${PATH6}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+        `${prefix}${PATH7}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    pokemon_color: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH8}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1hv6hpf['get']['resBody'], BasicHeaders, Methods_1hv6hpf['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1hv6hpf['get']['resBody'], BasicHeaders, Methods_1hv6hpf['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_2hlju9['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_2hlju9['get']['resBody'], BasicHeaders, Methods_2hlju9['get']['status']>(prefix, PATH8, GET, option).json(),
+      $get: (option?: { query?: Methods_2hlju9['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_2hlju9['get']['resBody'], BasicHeaders, Methods_2hlju9['get']['status']>(prefix, PATH8, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_2hlju9['get']['query'] } | undefined) =>
+        `${prefix}${PATH8}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    pokemon_habitat: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH9}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ow74pf['get']['resBody'], BasicHeaders, Methods_1ow74pf['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ow74pf['get']['resBody'], BasicHeaders, Methods_1ow74pf['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_5efco1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_5efco1['get']['resBody'], BasicHeaders, Methods_5efco1['get']['status']>(prefix, PATH9, GET, option).json(),
+      $get: (option?: { query?: Methods_5efco1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_5efco1['get']['resBody'], BasicHeaders, Methods_5efco1['get']['status']>(prefix, PATH9, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_5efco1['get']['query'] } | undefined) =>
+        `${prefix}${PATH9}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    pokemon_shape: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH10}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_dkwstx['get']['resBody'], BasicHeaders, Methods_dkwstx['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_dkwstx['get']['resBody'], BasicHeaders, Methods_dkwstx['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_1ethz6z['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_1ethz6z['get']['resBody'], BasicHeaders, Methods_1ethz6z['get']['status']>(prefix, PATH10, GET, option).json(),
+      $get: (option?: { query?: Methods_1ethz6z['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_1ethz6z['get']['resBody'], BasicHeaders, Methods_1ethz6z['get']['status']>(prefix, PATH10, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_1ethz6z['get']['query'] } | undefined) =>
+        `${prefix}${PATH10}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    stat: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH11}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_l61cak['get']['resBody'], BasicHeaders, Methods_l61cak['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_l61cak['get']['resBody'], BasicHeaders, Methods_l61cak['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_18euguo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH11, GET, option).json(),
+      $get: (option?: { query?: Methods_18euguo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH11, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_18euguo['get']['query'] } | undefined) =>
+        `${prefix}${PATH11}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
   };
 };

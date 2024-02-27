@@ -1,6 +1,6 @@
 {
   "name": "@project/database",
-  "description": "Prisma定義",
+  "description": "Prisma共通設定",
   "version": "1.0.0",
   "private": true,
   "author": "yoshi0518",

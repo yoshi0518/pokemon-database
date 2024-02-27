@@ -85,7 +85,7 @@ const getAbility = async (query?: QueryParamType) => {
         id: body.id,
         name: body.name,
         generation: body.generation.name,
-        is_main_series: body.is_main_series,
+        isMainSeries: body.is_main_series,
         abilityNames: {
           createMany: {
             data: abilityNameData,
