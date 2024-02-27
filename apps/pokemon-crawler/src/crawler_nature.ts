@@ -11,8 +11,8 @@ type NatureNameType = {
 
 type NatureMoveBattleStyleType = {
   name: string;
-  high_hp_preference: number;
-  low_hp_preference: number;
+  highHpPreference: number;
+  lowHpPreference: number;
 };
 
 const getNature = async (query?: QueryParamType) => {
@@ -52,8 +52,8 @@ const getNature = async (query?: QueryParamType) => {
       natureMoveBattleStyleKey.push(item.move_battle_style.name);
       natureMoveBattleStyleData.push({
         name: item.move_battle_style.name,
-        high_hp_preference: item.high_hp_preference,
-        low_hp_preference: item.low_hp_preference,
+        highHpPreference: item.high_hp_preference,
+        lowHpPreference: item.low_hp_preference,
       });
     });
     // === NatureMoveBattleStyle End ===
@@ -62,10 +62,10 @@ const getNature = async (query?: QueryParamType) => {
       data: {
         id: body.id,
         name: body.name,
-        decreased_stat: body.decreased_stat ? body.decreased_stat.name : null,
-        increased_stat: body.increased_stat ? body.increased_stat.name : null,
-        hates_flavor: body.hates_flavor ? body.hates_flavor.name : null,
-        likes_flavor: body.likes_flavor ? body.likes_flavor.name : null,
+        decreasedStat: body.decreased_stat ? body.decreased_stat.name : null,
+        increasedStat: body.increased_stat ? body.increased_stat.name : null,
+        hatesFlavor: body.hates_flavor ? body.hates_flavor.name : null,
+        likesFlavor: body.likes_flavor ? body.likes_flavor.name : null,
         natureNames: {
           createMany: {
             data: natureNameData,
@@ -97,6 +97,10 @@ truncate table t_crawler_nature;
 
   await prisma.$executeRaw`
 truncate table t_crawler_nature_names;
+  `;
+
+  await prisma.$executeRaw`
+truncate table t_crawler_nature_move_battle_styles;
   `;
 
   await getNature();
