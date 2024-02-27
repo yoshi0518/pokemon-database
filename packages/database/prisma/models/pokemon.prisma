@@ -270,3 +270,38 @@ model CrawlerPokemonHabitatNames {
   @@id([id, language])
   @@map("t_crawler_pokemon_habitat_names")
 }
+
+model CrawlerPokemonShape {
+  id                       Int                               @id
+  name                     String?                           @db.VarChar(500)
+  createdAt                DateTime                          @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                DateTime                          @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonShapeNames        CrawlerPokemonShapeNames[]
+  pokemonShapeAwesomeNames CrawlerPokemonShapeAwesomeNames[]
+
+  @@map("t_crawler_pokemon_shape")
+}
+
+model CrawlerPokemonShapeNames {
+  id           Int
+  language     String              @db.VarChar(100)
+  name         String?             @db.VarChar(500)
+  createdAt    DateTime            @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt    DateTime            @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonShape CrawlerPokemonShape @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_shape_names")
+}
+
+model CrawlerPokemonShapeAwesomeNames {
+  id           Int
+  language     String              @db.VarChar(100)
+  awesomeName  String?             @map("awesome_name") @db.VarChar(500)
+  createdAt    DateTime            @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt    DateTime            @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonShape CrawlerPokemonShape @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_shape_awesome_names")
+}
