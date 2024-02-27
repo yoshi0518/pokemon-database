@@ -226,3 +226,25 @@ model CrawlerPokeathlonStatAffectingNaturesIncrease {
   @@id([id, name])
   @@map("t_crawler_pokeathlon_stat_affecting_natures_increase")
 }
+
+model CrawlerPokemonColor {
+  id                Int                        @id
+  name              String?                    @db.VarChar(500)
+  createdAt         DateTime                   @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt         DateTime                   @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonColorNames CrawlerPokemonColorNames[]
+
+  @@map("t_crawler_pokemon_color")
+}
+
+model CrawlerPokemonColorNames {
+  id           Int
+  language     String              @db.VarChar(100)
+  name         String?             @db.VarChar(500)
+  createdAt    DateTime            @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt    DateTime            @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonColor CrawlerPokemonColor @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_color_names")
+}
