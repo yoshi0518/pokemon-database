@@ -181,3 +181,27 @@ export type PokemonStatType = {
   }[];
   characteristics: { url: string }[];
 };
+
+export type PokemonTypeType = {
+  id: number;
+  name: string;
+  generation: NamedAPIResourceType;
+  move_damage_class: NamedAPIResourceType;
+  damage_relations: {
+    double_damage_from: NamedAPIResourceType[];
+    double_damage_to: NamedAPIResourceType[];
+    half_damage_from: NamedAPIResourceType[];
+    half_damage_to: NamedAPIResourceType[];
+    no_damage_from: NamedAPIResourceType[];
+    no_damage_to: NamedAPIResourceType[];
+  };
+  game_indices: {
+    game_index: number;
+    generation: NamedAPIResourceType;
+  }[];
+  moves: NamedAPIResourceType[];
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+};

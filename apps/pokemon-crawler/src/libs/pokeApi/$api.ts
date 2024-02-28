@@ -23,6 +23,8 @@ import type { Methods as Methods_1ethz6z } from './pokemon-shape';
 import type { Methods as Methods_dkwstx } from './pokemon-shape/_id@number';
 import type { Methods as Methods_18euguo } from './stat';
 import type { Methods as Methods_l61cak } from './stat/_id@number';
+import type { Methods as Methods_1vnrg3e } from './type';
+import type { Methods as Methods_9m9z2u } from './type/_id@number';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://pokeapi.co/api/v2' : baseURL).replace(/\/$/, '');
@@ -38,6 +40,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH9 = '/pokemon-habitat';
   const PATH10 = '/pokemon-shape';
   const PATH11 = '/stat';
+  const PATH12 = '/type';
   const GET = 'GET';
 
   return {
@@ -257,6 +260,25 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH11, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_18euguo['get']['query'] } | undefined) =>
         `${prefix}${PATH11}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    type: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH12}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_9m9z2u['get']['resBody'], BasicHeaders, Methods_9m9z2u['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_9m9z2u['get']['resBody'], BasicHeaders, Methods_9m9z2u['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_1vnrg3e['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH12, GET, option).json(),
+      $get: (option?: { query?: Methods_1vnrg3e['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH12, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_1vnrg3e['get']['query'] } | undefined) =>
+        `${prefix}${PATH12}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
   };
 };
