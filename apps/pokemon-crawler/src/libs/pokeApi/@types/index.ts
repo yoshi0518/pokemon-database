@@ -133,6 +133,22 @@ export type PokemonColorType = {
   }[];
 };
 
+export type PokemonFormType = {
+  id: number;
+  name: string;
+  form_name: string;
+  form_names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  form_order: number;
+  is_battle_only: boolean;
+  is_default: boolean;
+  is_mega: boolean;
+  order: number;
+  version_group: NamedAPIResourceType;
+};
+
 export type PokemonHabitatType = {
   id: number;
   name: string;

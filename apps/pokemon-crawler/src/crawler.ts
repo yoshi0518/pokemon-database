@@ -6,6 +6,7 @@ import './crawler_growth_rate';
 import './crawler_nature';
 import './crawler_pokeathlon_stat';
 import './crawler_pokemon_color';
+import './crawler_pokemon_form';
 import './crawler_pokemon_habitat';
 import './crawler_pokemon_shape';
 import './crawler_stat';
