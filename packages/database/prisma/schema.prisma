@@ -275,6 +275,35 @@ model CrawlerPokemonColorNames {
   @@map("t_crawler_pokemon_color_names")
 }
 
+model CrawlerPokemonForm {
+  id               Int                       @id
+  name             String?                   @db.VarChar(500)
+  formName         String?                   @map("form_name") @db.VarChar(500)
+  formOrder        Int?                      @map("form_order")
+  isBattleOnly     Boolean?                  @map("is_battle_only")
+  isDefault        Boolean?                  @map("is_default")
+  isMega           Boolean?                  @map("is_mega")
+  order            Int?
+  versionGroup     String?                   @map("version_group")
+  createdAt        DateTime                  @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt        DateTime                  @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonFormNames CrawlerPokemonFormNames[]
+
+  @@map("t_crawler_pokemon_form")
+}
+
+model CrawlerPokemonFormNames {
+  id          Int
+  language    String             @db.VarChar(100)
+  name        String?            @db.VarChar(500)
+  createdAt   DateTime           @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt   DateTime           @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonForm CrawlerPokemonForm @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_form_names")
+}
+
 model CrawlerPokemonHabitat {
   id                  Int                          @id
   name                String?                      @db.VarChar(500)
