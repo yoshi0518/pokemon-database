@@ -1,7 +1,7 @@
 model CrawlerAbility {
   id                Int                        @id
   name              String?                    @db.VarChar(500)
-  generation        String?                    @db.VarChar(100)
+  generation        String?                    @db.VarChar(500)
   isMainSeries      Boolean?                   @map("is_main_series")
   createdAt         DateTime                   @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt         DateTime                   @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
@@ -129,7 +129,7 @@ model CrawlerGrowthRate {
 
 model CrawlerGrowthRateLevels {
   id         Int
-  level      Int               @db.SmallInt
+  level      Int
   experience Int?
   createdAt  DateTime          @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt  DateTime          @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
@@ -142,10 +142,10 @@ model CrawlerGrowthRateLevels {
 model CrawlerNature {
   id                     Int                             @id
   name                   String?                         @db.VarChar(500)
-  decreasedStat          String?                         @map("decreased_stat") @db.VarChar(100)
-  increasedStat          String?                         @map("increased_stat") @db.VarChar(100)
-  hatesFlavor            String?                         @map("hates_flavor") @db.VarChar(100)
-  likesFlavor            String?                         @map("likes_flavor") @db.VarChar(100)
+  decreasedStat          String?                         @map("decreased_stat") @db.VarChar(500)
+  increasedStat          String?                         @map("increased_stat") @db.VarChar(500)
+  hatesFlavor            String?                         @map("hates_flavor") @db.VarChar(500)
+  likesFlavor            String?                         @map("likes_flavor") @db.VarChar(500)
   createdAt              DateTime                        @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt              DateTime                        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   natureNames            CrawlerNatureNames[]
@@ -227,6 +227,199 @@ model CrawlerPokeathlonStatAffectingNaturesIncrease {
   @@map("t_crawler_pokeathlon_stat_affecting_natures_increase")
 }
 
+model CrawlerPokemon {
+  id                 Int                         @id
+  name               String?                     @db.VarChar(500)
+  baseExperience     Int?                        @map("base_experience")
+  height             Int?
+  weight             Int?
+  isDefault          Boolean?                    @map("is_default")
+  order              Int?
+  createdAt          DateTime                    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt          DateTime                    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonAbilities   CrawlerPokemonAbilities[]
+  pokemonCries       CrawlerPokemonCries[]
+  pokemonEncounters  CrawlerPokemonEncounters[]
+  pokemonGameIndices CrawlerPokemonGameIndices[]
+  pokemonHeldItems   CrawlerPokemonHeldItems[]
+  pokemonMoves       CrawlerPokemonMoves[]
+  pokemonStats       CrawlerPokemonStats[]
+  pokemonTypes       CrawlerPokemonTypes[]
+
+  @@map("t_crawler_pokemon")
+}
+
+model CrawlerPokemonAbilities {
+  id        Int
+  ability   String         @db.VarChar(100)
+  isHidden  Boolean?       @map("is_hidden")
+  slot      Int?
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
+
+  @@id([id, ability])
+  @@map("t_crawler_pokemon_abilities")
+}
+
+model CrawlerPokemonCries {
+  id        Int
+  version   String         @db.VarChar(100)
+  cries     String?        @db.VarChar(500)
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
+
+  @@id([id, version])
+  @@map("t_crawler_pokemon_cries")
+}
+
+model CrawlerPokemonEncounters {
+  id                              Int
+  locationArea                    String                                   @map("location_area") @db.VarChar(100)
+  createdAt                       DateTime                                 @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                       DateTime                                 @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon                         CrawlerPokemon                           @relation(fields: [id], references: [id])
+  pokemonEncountersVersionDetails CrawlerPokemonEncountersVersionDetails[]
+
+  @@id([id, locationArea])
+  @@map("t_crawler_pokemon_encounters")
+}
+
+model CrawlerPokemonEncountersVersionDetails {
+  id                                       Int
+  locationArea                             String                                            @map("location_area") @db.VarChar(100)
+  version                                  String                                            @db.VarChar(100)
+  maxChance                                Int?                                              @map("max_chance")
+  createdAt                                DateTime                                          @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                                DateTime                                          @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonEncounters                        CrawlerPokemonEncounters                          @relation(fields: [id, locationArea], references: [id, locationArea])
+  pokemonEncountersVersionEncounterDetails CrawlerPokemonEncountersVersionEncounterDetails[]
+
+  @@id([id, locationArea, version])
+  @@map("t_crawler_pokemon_encounters_version_details")
+}
+
+model CrawlerPokemonEncountersVersionEncounterDetails {
+  id                                                Int
+  locationArea                                      String                                                     @map("location_area") @db.VarChar(100)
+  version                                           String                                                     @db.VarChar(100)
+  rowNo                                             Int                                                        @map("row_no")
+  chance                                            Int?
+  method                                            String?                                                    @db.VarChar(500)
+  maxLevel                                          Int?                                                       @map("max_level")
+  minLevel                                          Int?                                                       @map("min_level")
+  createdAt                                         DateTime                                                   @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                                         DateTime                                                   @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonEncountersVersionDetails                   CrawlerPokemonEncountersVersionDetails                     @relation(fields: [id, locationArea, version], references: [id, locationArea, version])
+  pokemonEncountersVersionEncounterConditionDetails CrawlerPokemonEncountersVersionEncounterConditionDetails[]
+
+  @@id([id, locationArea, version, rowNo])
+  @@map("t_crawler_pokemon_encounters_version_encounter_details")
+}
+
+model CrawlerPokemonEncountersVersionEncounterConditionDetails {
+  id                                       Int
+  locationArea                             String                                          @map("location_area") @db.VarChar(100)
+  version                                  String                                          @db.VarChar(100)
+  rowNo                                    Int                                             @map("row_no")
+  condition                                String                                          @db.VarChar(100)
+  createdAt                                DateTime                                        @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt                                DateTime                                        @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonEncountersVersionEncounterDetails CrawlerPokemonEncountersVersionEncounterDetails @relation(fields: [id, locationArea, version, rowNo], references: [id, locationArea, version, rowNo])
+
+  @@id([id, locationArea, version, rowNo, condition])
+  @@map("t_crawler_pokemon_encounters_version_encounter_condition_details")
+}
+
+model CrawlerPokemonGameIndices {
+  id        Int
+  rowNo     Int            @map("row_no")
+  gameIndex Int?           @map("game_index")
+  version   String?        @db.VarChar(500)
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_pokemon_game_indices")
+}
+
+model CrawlerPokemonHeldItems {
+  id                      Int
+  item                    String                           @db.VarChar(100)
+  createdAt               DateTime                         @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt               DateTime                         @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon                 CrawlerPokemon                   @relation(fields: [id], references: [id])
+  pokemonHeldItemsDetails CrawlerPokemonHeldItemsDetails[]
+
+  @@id([id, item])
+  @@map("t_crawler_pokemon_held_items")
+}
+
+model CrawlerPokemonHeldItemsDetails {
+  id               Int
+  item             String                  @db.VarChar(100)
+  version          String                  @db.VarChar(100)
+  rarity           Int?
+  createdAt        DateTime                @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt        DateTime                @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonHeldItems CrawlerPokemonHeldItems @relation(fields: [id, item], references: [id, item])
+
+  @@id([id, item, version])
+  @@map("t_crawler_pokemon_held_items_details")
+}
+
+model CrawlerPokemonMoves {
+  id                  Int
+  move                String                       @db.VarChar(100)
+  createdAt           DateTime                     @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt           DateTime                     @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon             CrawlerPokemon               @relation(fields: [id], references: [id])
+  pokemonMovesDetails CrawlerPokemonMovesDetails[]
+
+  @@id([id, move])
+  @@map("t_crawler_pokemon_moves")
+}
+
+model CrawlerPokemonMovesDetails {
+  id              Int
+  move            String              @db.VarChar(100)
+  moveLearnMethod String              @map("move_learn_method") @db.VarChar(100)
+  versionGroup    String              @map("version_group") @db.VarChar(100)
+  levelLearnedAt  Int?                @map("level_learned_at")
+  createdAt       DateTime            @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt       DateTime            @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonMoves    CrawlerPokemonMoves @relation(fields: [id, move], references: [id, move])
+
+  @@id([id, move, moveLearnMethod, versionGroup])
+  @@map("t_crawler_pokemon_moves_details")
+}
+
+model CrawlerPokemonStats {
+  id        Int
+  stat      String         @db.VarChar(100)
+  baseStat  Int?           @map("base_stat")
+  effort    Int?
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
+
+  @@id([id, stat])
+  @@map("t_crawler_pokemon_stats")
+}
+
+model CrawlerPokemonTypes {
+  id        Int
+  type      String         @db.VarChar(100)
+  createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
+
+  @@id([id, type])
+  @@map("t_crawler_pokemon_types")
+}
+
 model CrawlerPokemonColor {
   id                Int                        @id
   name              String?                    @db.VarChar(500)
@@ -247,6 +440,35 @@ model CrawlerPokemonColorNames {
 
   @@id([id, language])
   @@map("t_crawler_pokemon_color_names")
+}
+
+model CrawlerPokemonForm {
+  id               Int                       @id
+  name             String?                   @db.VarChar(500)
+  formName         String?                   @map("form_name") @db.VarChar(500)
+  formOrder        Int?                      @map("form_order")
+  isBattleOnly     Boolean?                  @map("is_battle_only")
+  isDefault        Boolean?                  @map("is_default")
+  isMega           Boolean?                  @map("is_mega")
+  order            Int?
+  versionGroup     String?                   @map("version_group")
+  createdAt        DateTime                  @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt        DateTime                  @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonFormNames CrawlerPokemonFormNames[]
+
+  @@map("t_crawler_pokemon_form")
+}
+
+model CrawlerPokemonFormNames {
+  id          Int
+  language    String             @db.VarChar(100)
+  name        String?            @db.VarChar(500)
+  createdAt   DateTime           @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt   DateTime           @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  pokemonForm CrawlerPokemonForm @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_form_names")
 }
 
 model CrawlerPokemonHabitat {
@@ -392,4 +614,133 @@ model CrawlerStatCharacteristics {
 
   @@id([id, rowNo])
   @@map("t_crawler_stat_characteristics")
+}
+
+model CrawlerType {
+  id                   Int                           @id
+  name                 String?                       @db.VarChar(500)
+  generation           String?                       @db.VarChar(500)
+  moveDamageClass      String?                       @map("move_damage_class") @db.VarChar(500)
+  createdAt            DateTime                      @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt            DateTime                      @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  typeNames            CrawlerTypeNames[]
+  typeDoubleDamageFrom CrawlerTypeDoubleDamageFrom[]
+  typeDoubleDamageTo   CrawlerTypeDoubleDamageTo[]
+  typeHalfDamageFrom   CrawlerTypeHalfDamageFrom[]
+  typeHalfDamageTo     CrawlerTypeHalfDamageTo[]
+  typeNoDamageFrom     CrawlerTypeNoDamageFrom[]
+  typeNoDamageTo       CrawlerTypeNoDamageTo[]
+  typeGameIndices      CrawlerTypeGameIndices[]
+  typeMoves            CrawlerTypeMoves[]
+
+  @@map("t_crawler_type")
+}
+
+model CrawlerTypeNames {
+  id        Int
+  language  String      @db.VarChar(500)
+  name      String?     @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+  @@map("t_crawler_type_names")
+}
+
+model CrawlerTypeDoubleDamageFrom {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_double_damage_from")
+}
+
+model CrawlerTypeDoubleDamageTo {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_double_damage_to")
+}
+
+model CrawlerTypeHalfDamageFrom {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_half_damage_from")
+}
+
+model CrawlerTypeHalfDamageTo {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_half_damage_to")
+}
+
+model CrawlerTypeNoDamageFrom {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_no_damage_from")
+}
+
+model CrawlerTypeNoDamageTo {
+  id        Int
+  rowNo     Int         @map("row_no")
+  typeName  String?     @map("type_name") @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_no_damage_to")
+}
+
+model CrawlerTypeGameIndices {
+  id         Int
+  rowNo      Int         @map("row_no")
+  gameIndex  Int?        @map("game_index")
+  generation String?     @db.VarChar(500)
+  createdAt  DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt  DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type       CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_game_indices")
+}
+
+model CrawlerTypeMoves {
+  id        Int
+  rowNo     Int         @map("row_no")
+  move      String?     @db.VarChar(500)
+  createdAt DateTime    @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime    @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+  type      CrawlerType @relation(fields: [id], references: [id])
+
+  @@id([id, rowNo])
+  @@map("t_crawler_type_moves")
 }

@@ -124,6 +124,70 @@ export type PokemonPokeathlonStatType = {
   };
 };
 
+export type PokemonType = {
+  id: number;
+  name: string;
+  base_experience: number;
+  height: number;
+  weight: number;
+  is_default: boolean;
+  order: number;
+  abilities: {
+    ability: NamedAPIResourceType;
+    is_hidden: boolean;
+    slot: number;
+  }[];
+  cries: {
+    latest: string;
+    legacy: string;
+  };
+  game_indices: {
+    game_index: number;
+    version: NamedAPIResourceType;
+  }[];
+  held_items: {
+    item: NamedAPIResourceType;
+    version_details: {
+      rarity: number;
+      version: NamedAPIResourceType;
+    }[];
+  }[];
+  moves: {
+    move: NamedAPIResourceType;
+    version_group_details: {
+      level_learned_at: number;
+      move_learn_method: NamedAPIResourceType;
+      version_group: NamedAPIResourceType;
+    }[];
+  }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: NamedAPIResourceType;
+  }[];
+  types: {
+    slot: number;
+    type: NamedAPIResourceType;
+  }[];
+};
+
+export type PokemonEncountersType = {
+  location_area: NamedAPIResourceType;
+  version_details: {
+    encounter_details: {
+      chance: number;
+      condition_values: NamedAPIResourceType[];
+      max_level: number;
+      method: NamedAPIResourceType;
+      min_level: number;
+    }[];
+    max_chance: number;
+    version: NamedAPIResourceType;
+  }[];
+}[];
+
+// export type PokemonSpeciesType = {};
+
 export type PokemonColorType = {
   id: number;
   name: string;
@@ -131,6 +195,22 @@ export type PokemonColorType = {
     name: string;
     language: NamedAPIResourceType;
   }[];
+};
+
+export type PokemonFormType = {
+  id: number;
+  name: string;
+  form_name: string;
+  form_names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  form_order: number;
+  is_battle_only: boolean;
+  is_default: boolean;
+  is_mega: boolean;
+  order: number;
+  version_group: NamedAPIResourceType;
 };
 
 export type PokemonHabitatType = {
@@ -180,4 +260,28 @@ export type PokemonStatType = {
     language: NamedAPIResourceType;
   }[];
   characteristics: { url: string }[];
+};
+
+export type PokemonTypeType = {
+  id: number;
+  name: string;
+  generation: NamedAPIResourceType;
+  move_damage_class: NamedAPIResourceType;
+  damage_relations: {
+    double_damage_from: NamedAPIResourceType[];
+    double_damage_to: NamedAPIResourceType[];
+    half_damage_from: NamedAPIResourceType[];
+    half_damage_to: NamedAPIResourceType[];
+    no_damage_from: NamedAPIResourceType[];
+    no_damage_to: NamedAPIResourceType[];
+  };
+  game_indices: {
+    game_index: number;
+    generation: NamedAPIResourceType;
+  }[];
+  moves: NamedAPIResourceType[];
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
 };

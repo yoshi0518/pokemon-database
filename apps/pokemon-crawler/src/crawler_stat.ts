@@ -105,7 +105,7 @@ const getStat = async (query?: QueryParamType) => {
 
     // === CharacteristicsPossibleValue Start ===
     const characteristicsNoData = body.characteristics.map((item, index) => ({
-      rowNo: index,
+      rowNo: index + 1,
       characteristicsNo: Number(item.url.split('/')[6]),
     }));
     // === CharacteristicsPossibleValue End ===

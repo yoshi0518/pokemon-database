@@ -38,7 +38,7 @@ const getCharacteristics = async (query?: QueryParamType) => {
 
     // === CharacteristicsPossibleValue Start ===
     const characteristicsPossibleValueData = body.possible_values.map((possibleValue, index) => ({
-      rowNo: index,
+      rowNo: index + 1,
       possibleValue: possibleValue,
     }));
     // === CharacteristicsPossibleValue End ===
