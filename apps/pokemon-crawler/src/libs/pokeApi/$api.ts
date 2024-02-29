@@ -15,6 +15,7 @@ import type { Methods as Methods_1enxcrb } from './nature/_id@number';
 import type { Methods as Methods_10ps824 } from './pokeathlon-stat';
 import type { Methods as Methods_ra7nqg } from './pokeathlon-stat/_id@number';
 import type { Methods as Methods_xncz6f } from './pokemon';
+import type { Methods as Methods_1ex6rmp } from './pokemon/_id@number';
 import type { Methods as Methods_2hlju9 } from './pokemon-color';
 import type { Methods as Methods_1hv6hpf } from './pokemon-color/_id@number';
 import type { Methods as Methods_ygl6go } from './pokemon-form';
@@ -181,6 +182,17 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         `${prefix}${PATH6}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
     pokemon: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH7}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ex6rmp['get']['resBody'], BasicHeaders, Methods_1ex6rmp['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_1ex6rmp['get']['resBody'], BasicHeaders, Methods_1ex6rmp['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
       get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_xncz6f['get']['resBody'], BasicHeaders, Methods_xncz6f['get']['status']>(prefix, PATH7, GET, option).json(),
       $get: (option?: { query?: Methods_xncz6f['get']['query'] | undefined, config?: T | undefined } | undefined) =>
