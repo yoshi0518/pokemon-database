@@ -43,81 +43,81 @@ const getPokemon = async (query?: QueryParamType) => {
   if (!body.results.length) return;
 
   for await (const result of body.results) {
-    const id = Number(result.url.split('/')[6]);
-    const { body } = await pokeApiClient.pokemon._id(id).get();
-
-    console.info(`\n=== Stat: ${id} ===`);
-
-    // === PokemonAbility Start ===
-    const pokemonAbilityKey: string[] = [];
-    const pokemonAbilityData: PokemonAbilityType[] = [];
-
-    body.abilities.forEach((item) => {
-      if (pokemonAbilityKey.includes(item.ability.name)) return;
-
-      pokemonAbilityKey.push(item.ability.name);
-      pokemonAbilityData.push({
-        ability: item.ability.name,
-        isHidden: item.is_hidden,
-        slot: item.slot,
-      });
-    });
-    // === PokemonAbility End ===
-
-    // === PokemonCry Start ===
-    const pokemonCryKey: string[] = [];
-    const pokemonCryData: PokemonCryType[] = [];
-
-    Object.entries(body.cries).forEach(([version, cries]) => {
-      if (pokemonCryKey.includes(version)) return;
-
-      pokemonCryKey.push(version);
-      pokemonCryData.push({
-        version,
-        cries,
-      });
-    });
-    // === PokemonCry End ===
-
-    // === PokemonGameIndices Start ===
-    const pokemonGameIndicesData = body.game_indices.map((item, index) => ({
-      rowNo: index + 1,
-      gameIndex: item.game_index,
-      version: item.version.name,
-    }));
-    // === PokemonGameIndices End ===
-
-    // === PokemonStat Start ===
-    const pokemonStatKey: string[] = [];
-    const pokemonStatData: PokemonStatType[] = [];
-
-    body.stats.forEach((item) => {
-      if (pokemonStatKey.includes(item.stat.name)) return;
-
-      pokemonStatKey.push(item.stat.name);
-      pokemonStatData.push({
-        stat: item.stat.name,
-        baseStat: item.base_stat,
-        effort: item.effort,
-      });
-    });
-    // === PokemonStat End ===
-
-    // === PokemonType Start ===
-    const pokemonTypeKey: string[] = [];
-    const pokemonTypeData: PokemonTypeType[] = [];
-
-    body.types.forEach((item) => {
-      if (pokemonTypeKey.includes(item.type.name)) return;
-
-      pokemonTypeKey.push(item.type.name);
-      pokemonTypeData.push({
-        type: item.type.name,
-      });
-    });
-    // === PokemonType End ===
-
     await prisma.$transaction(async (prisma) => {
+      const id = Number(result.url.split('/')[6]);
+      const { body } = await pokeApiClient.pokemon._id(id).get();
+
+      console.info(`\n=== Pokemon: ${id} ===`);
+
+      // === PokemonAbility Start ===
+      const pokemonAbilityKey: string[] = [];
+      const pokemonAbilityData: PokemonAbilityType[] = [];
+
+      body.abilities.forEach((item) => {
+        if (pokemonAbilityKey.includes(item.ability.name)) return;
+
+        pokemonAbilityKey.push(item.ability.name);
+        pokemonAbilityData.push({
+          ability: item.ability.name,
+          isHidden: item.is_hidden,
+          slot: item.slot,
+        });
+      });
+      // === PokemonAbility End ===
+
+      // === PokemonCry Start ===
+      const pokemonCryKey: string[] = [];
+      const pokemonCryData: PokemonCryType[] = [];
+
+      Object.entries(body.cries).forEach(([version, cries]) => {
+        if (pokemonCryKey.includes(version)) return;
+
+        pokemonCryKey.push(version);
+        pokemonCryData.push({
+          version,
+          cries,
+        });
+      });
+      // === PokemonCry End ===
+
+      // === PokemonGameIndices Start ===
+      const pokemonGameIndicesData = body.game_indices.map((item, index) => ({
+        rowNo: index + 1,
+        gameIndex: item.game_index,
+        version: item.version.name,
+      }));
+      // === PokemonGameIndices End ===
+
+      // === PokemonStat Start ===
+      const pokemonStatKey: string[] = [];
+      const pokemonStatData: PokemonStatType[] = [];
+
+      body.stats.forEach((item) => {
+        if (pokemonStatKey.includes(item.stat.name)) return;
+
+        pokemonStatKey.push(item.stat.name);
+        pokemonStatData.push({
+          stat: item.stat.name,
+          baseStat: item.base_stat,
+          effort: item.effort,
+        });
+      });
+      // === PokemonStat End ===
+
+      // === PokemonType Start ===
+      const pokemonTypeKey: string[] = [];
+      const pokemonTypeData: PokemonTypeType[] = [];
+
+      body.types.forEach((item) => {
+        if (pokemonTypeKey.includes(item.type.name)) return;
+
+        pokemonTypeKey.push(item.type.name);
+        pokemonTypeData.push({
+          type: item.type.name,
+        });
+      });
+      // === PokemonType End ===
+
       await prisma.crawlerPokemon.create({
         data: {
           id: body.id,
@@ -238,22 +238,6 @@ truncate table t_crawler_pokemon_abilities;
 
   await prisma.$executeRaw`
 truncate table t_crawler_pokemon_cries;
-  `;
-
-  await prisma.$executeRaw`
-truncate table t_crawler_pokemon_encounters;
-  `;
-
-  await prisma.$executeRaw`
-truncate table t_crawler_pokemon_encounters_version_details;
-  `;
-
-  await prisma.$executeRaw`
-truncate table t_crawler_pokemon_encounters_version_encounter_details;
-  `;
-
-  await prisma.$executeRaw`
-truncate table t_crawler_pokemon_encounters_version_encounter_condition_details;
   `;
 
   await prisma.$executeRaw`
