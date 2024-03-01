@@ -225,7 +225,6 @@ const getPokemon = async (query?: QueryParamType) => {
     });
   }
 };
-4;
 
 export const main = async () => {
   await prisma.$executeRaw`
