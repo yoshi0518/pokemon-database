@@ -528,6 +528,121 @@ model CrawlerPokemonShapeAwesomeNames {
   @@map("t_crawler_pokemon_shape_awesome_names")
 }
 
+model CrawlerPokemonSpecies {
+  id                   Int      @id
+  name                 String?
+  baseHappiness        Int?     @map("base_happiness")
+  captureRate          Int?     @map("capture_rate")
+  color                String?
+  evolutionChain       Int?     @map("evolution_chain")
+  evolvesFromSpecies   String?  @map("evolves_from_species")
+  formsSwitchable      Boolean? @map("forms_switchable")
+  genderRate           Int?     @map("gender_rate")
+  generation           String?
+  growthRate           String?  @map("growth_rate")
+  habitat              String?
+  hasGenderDifferences Boolean? @map("has_gender_differences")
+  hatchCounter         Int?     @map("hatch_counter")
+  isBaby               Boolean? @map("is_baby")
+  isLegendary          Boolean? @map("is_legendary")
+  isMythical           Boolean? @map("is_mythical")
+  order                Int?
+  shape                String?
+  createdAt            DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt            DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@map("t_crawler_pokemon_species")
+}
+
+model CrawlerPokemonSpeciesEggGroups {
+  id        Int
+  eggGroup  String   @map("egg_group")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, eggGroup])
+  @@map("t_crawler_pokemon_species_egg_groups")
+}
+
+model CrawlerPokemonSpeciesFlavorTextEntries {
+  id         Int
+  language   String   @db.VarChar(100)
+  version    String   @db.VarChar(100)
+  flavorText String?  @map("flavor_text") @db.VarChar(500)
+  createdAt  DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt  DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, language, version])
+  @@map("t_crawler_pokemon_species_flavor_text_entries")
+}
+
+model CrawlerPokemonSpeciesFormDescriptions {
+  id          Int
+  language    String   @db.VarChar(100)
+  description String?  @db.VarChar(500)
+  createdAt   DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt   DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_species_form_descriptions")
+}
+
+model CrawlerPokemonSpeciesGenera {
+  id        Int
+  language  String   @db.VarChar(100)
+  genus     String?  @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_species_genera")
+}
+
+model CrawlerPokemonSpeciesNames {
+  id        Int
+  language  String   @db.VarChar(100)
+  name      String?  @db.VarChar(500)
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, language])
+  @@map("t_crawler_pokemon_species_names")
+}
+
+model CrawlerPokemonSpeciesPalParkEncounters {
+  id        Int
+  area      String   @db.VarChar(100)
+  baseScore Int?     @map("base_score")
+  rate      Int?
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, area])
+  @@map("t_crawler_pokemon_species_pal_park_encounters")
+}
+
+model CrawlerPokemonSpeciesPokedexNumbers {
+  id          Int
+  pokedex     String
+  entryNumber Int?     @map("entry_number")
+  createdAt   DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt   DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, pokedex])
+  @@map("t_crawler_pokemon_species_pokedex_numbers")
+}
+
+model CrawlerPokemonSpeciesVarieties {
+  id        Int
+  pokemon   String   @db.VarChar(100)
+  isDefault Boolean? @map("is_default")
+  createdAt DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
+  updatedAt DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
+
+  @@id([id, pokemon])
+  @@map("t_crawler_pokemon_species_varieties")
+}
+
 model CrawlerStat {
   id                           Int                                   @id
   name                         String?                               @db.VarChar(500)
