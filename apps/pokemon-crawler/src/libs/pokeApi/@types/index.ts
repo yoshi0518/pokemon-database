@@ -235,6 +235,61 @@ export type PokemonShapeType = {
   }[];
 };
 
+export type PokemonSpeciesType = {
+  id: number;
+  name: string;
+  order: number;
+  gender_rate: number;
+  capture_rate: number;
+  base_happiness: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  hatch_counter: number;
+  has_gender_differences: boolean;
+  forms_switchable: boolean;
+  growth_rate: NamedAPIResourceType;
+  pokedex_numbers: {
+    entry_number: number;
+    pokedex: NamedAPIResourceType;
+  };
+  egg_groups: NamedAPIResourceType[];
+  color: NamedAPIResourceType;
+  shape: NamedAPIResourceType;
+  evolves_from_species: NamedAPIResourceType;
+  evolution_chain: {
+    url: string;
+  };
+  habitat: NamedAPIResourceType;
+  generation: NamedAPIResourceType;
+  names: {
+    name: string;
+    language: NamedAPIResourceType;
+  }[];
+  pal_park_encounters: {
+    area: NamedAPIResourceType;
+    base_score: number;
+    rate: number;
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: NamedAPIResourceType;
+    version: NamedAPIResourceType;
+  };
+  form_descriptions: {
+    description: string;
+    language: NamedAPIResourceType;
+  }[];
+  genera: {
+    genus: string;
+    language: NamedAPIResourceType;
+  }[];
+  varieties: {
+    is_default: boolean;
+    pokemon: NamedAPIResourceType;
+  }[];
+};
+
 export type PokemonStatType = {
   id: number;
   name: string;

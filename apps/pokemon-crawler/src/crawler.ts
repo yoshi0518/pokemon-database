@@ -11,5 +11,6 @@ import './crawler_pokemon_encounters';
 import './crawler_pokemon_form';
 import './crawler_pokemon_habitat';
 import './crawler_pokemon_shape';
+import './crawler_pokemon_species';
 import './crawler_stat';
 import './crawler_type';

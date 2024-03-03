@@ -25,6 +25,8 @@ import type { Methods as Methods_5efco1 } from './pokemon-habitat';
 import type { Methods as Methods_1ow74pf } from './pokemon-habitat/_id@number';
 import type { Methods as Methods_1ethz6z } from './pokemon-shape';
 import type { Methods as Methods_dkwstx } from './pokemon-shape/_id@number';
+import type { Methods as Methods_v1bpj8 } from './pokemon-species';
+import type { Methods as Methods_2uwef4 } from './pokemon-species/_id@number';
 import type { Methods as Methods_18euguo } from './stat';
 import type { Methods as Methods_l61cak } from './stat/_id@number';
 import type { Methods as Methods_1vnrg3e } from './type';
@@ -45,8 +47,9 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH10 = '/pokemon-form';
   const PATH11 = '/pokemon-habitat';
   const PATH12 = '/pokemon-shape';
-  const PATH13 = '/stat';
-  const PATH14 = '/type';
+  const PATH13 = '/pokemon-species';
+  const PATH14 = '/stat';
+  const PATH15 = '/type';
   const GET = 'GET';
 
   return {
@@ -285,9 +288,28 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       $path: (option?: { method?: 'get' | undefined; query: Methods_1ethz6z['get']['query'] } | undefined) =>
         `${prefix}${PATH12}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
-    stat: {
+    pokemon_species: {
       _id: (val1: number) => {
         const prefix1 = `${PATH13}/${val1}`;
+
+        return {
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_2uwef4['get']['resBody'], BasicHeaders, Methods_2uwef4['get']['status']>(prefix, prefix1, GET, option).json(),
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods_2uwef4['get']['resBody'], BasicHeaders, Methods_2uwef4['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`,
+        };
+      },
+      get: (option?: { query?: Methods_v1bpj8['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_v1bpj8['get']['resBody'], BasicHeaders, Methods_v1bpj8['get']['status']>(prefix, PATH13, GET, option).json(),
+      $get: (option?: { query?: Methods_v1bpj8['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        fetch<Methods_v1bpj8['get']['resBody'], BasicHeaders, Methods_v1bpj8['get']['status']>(prefix, PATH13, GET, option).json().then(r => r.body),
+      $path: (option?: { method?: 'get' | undefined; query: Methods_v1bpj8['get']['query'] } | undefined) =>
+        `${prefix}${PATH13}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+    },
+    stat: {
+      _id: (val1: number) => {
+        const prefix1 = `${PATH14}/${val1}`;
 
         return {
           get: (option?: { config?: T | undefined } | undefined) =>
@@ -298,15 +320,15 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         };
       },
       get: (option?: { query?: Methods_18euguo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH13, GET, option).json(),
+        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH14, GET, option).json(),
       $get: (option?: { query?: Methods_18euguo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH13, GET, option).json().then(r => r.body),
+        fetch<Methods_18euguo['get']['resBody'], BasicHeaders, Methods_18euguo['get']['status']>(prefix, PATH14, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_18euguo['get']['query'] } | undefined) =>
-        `${prefix}${PATH13}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+        `${prefix}${PATH14}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
     type: {
       _id: (val1: number) => {
-        const prefix1 = `${PATH14}/${val1}`;
+        const prefix1 = `${PATH15}/${val1}`;
 
         return {
           get: (option?: { config?: T | undefined } | undefined) =>
@@ -317,11 +339,11 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         };
       },
       get: (option?: { query?: Methods_1vnrg3e['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH14, GET, option).json(),
+        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH15, GET, option).json(),
       $get: (option?: { query?: Methods_1vnrg3e['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH14, GET, option).json().then(r => r.body),
+        fetch<Methods_1vnrg3e['get']['resBody'], BasicHeaders, Methods_1vnrg3e['get']['status']>(prefix, PATH15, GET, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_1vnrg3e['get']['query'] } | undefined) =>
-        `${prefix}${PATH14}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+        `${prefix}${PATH15}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
   };
 };
