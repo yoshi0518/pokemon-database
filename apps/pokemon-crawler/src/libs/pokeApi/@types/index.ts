@@ -186,8 +186,6 @@ export type PokemonEncountersType = {
   }[];
 }[];
 
-// export type PokemonSpeciesType = {};
-
 export type PokemonColorType = {
   id: number;
   name: string;
@@ -252,7 +250,7 @@ export type PokemonSpeciesType = {
   pokedex_numbers: {
     entry_number: number;
     pokedex: NamedAPIResourceType;
-  };
+  }[];
   egg_groups: NamedAPIResourceType[];
   color: NamedAPIResourceType;
   shape: NamedAPIResourceType;
@@ -275,7 +273,7 @@ export type PokemonSpeciesType = {
     flavor_text: string;
     language: NamedAPIResourceType;
     version: NamedAPIResourceType;
-  };
+  }[];
   form_descriptions: {
     description: string;
     language: NamedAPIResourceType;
