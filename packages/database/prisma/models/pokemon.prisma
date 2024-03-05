@@ -579,7 +579,7 @@ model CrawlerPokemonSpeciesFlavorTextEntries {
 model CrawlerPokemonSpeciesFormDescriptions {
   id          Int
   language    String   @db.VarChar(100)
-  description String?  @db.VarChar(500)
+  description String?  @db.Text
   createdAt   DateTime @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt   DateTime @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
 
