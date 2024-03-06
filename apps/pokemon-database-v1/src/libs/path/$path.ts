@@ -1,5 +1,5 @@
 export const pagesPath = {
-  $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/' as const, hash: url?.hash }),
+  $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/' as const, hash: url?.hash })
 };
 
 export type PagesPath = typeof pagesPath;
@@ -1186,7 +1186,7 @@ export const staticPath = {
     $903_png: '/images/903.png',
     $904_png: '/images/904.png',
     $905_Therian_png: '/images/905-Therian.png',
-    $905_png: '/images/905.png',
+    $905_png: '/images/905.png'
   },
   main_js: '/main.js',
   manifest_json: '/manifest.json',
@@ -2097,8 +2097,8 @@ export const staticPath = {
     $902_png: '/thumbnails/902.png',
     $903_png: '/thumbnails/903.png',
     $904_png: '/thumbnails/904.png',
-    $905_png: '/thumbnails/905.png',
-  },
+    $905_png: '/thumbnails/905.png'
+  }
 } as const;
 
 export type StaticPath = typeof staticPath;
