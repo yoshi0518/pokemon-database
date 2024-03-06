@@ -8,6 +8,7 @@
     "fmt": "pnpm project fmt",
     "lint": "pnpm project lint",
     "dev": "turbo dev",
+    "prebuild": "turbo prebuild",
     "build": "turbo build",
     "start": "turbo start",
     "storybook": "turbo storybook",
