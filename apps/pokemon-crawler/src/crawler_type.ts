@@ -9,18 +9,6 @@ type TypeNameType = {
   name: string;
 };
 
-// type AbilityEffectType = {
-//   language: string;
-//   effect: string;
-//   shortEffect: string;
-// };
-
-// type AbilityFlavorTextType = {
-//   language: string;
-//   versionGroup: string;
-//   flavorText: string;
-// };
-
 const getType = async (query?: QueryParamType) => {
   const { body } = await pokeApiClient.type.get({ query });
   // console.log({ ...body });

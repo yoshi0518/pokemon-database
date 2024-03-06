@@ -202,6 +202,8 @@ const getPokemonSpecies = async (query?: QueryParamType) => {
           evolvesFromSpecies: body.evolves_from_species ? body.evolves_from_species.name : null,
           formsSwitchable: body.forms_switchable,
           genderRate: body.gender_rate,
+          generation: body.generation ? body.generation.name : null,
+          growthRate: body.growth_rate ? body.growth_rate.name : null,
           habitat: body.habitat ? body.habitat.name : null,
           hasGenderDifferences: body.has_gender_differences,
           hatchCounter: body.hatch_counter,
