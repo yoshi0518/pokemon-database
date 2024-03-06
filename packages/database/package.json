@@ -9,7 +9,7 @@
     "prisma:reset": "prisma migrate reset",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
-    "build": "prisma-import --force && prisma db push && prisma generate",
+    "prebuild": "prisma-import --force && prisma db push && ts-node ./create_view.mjs && prisma generate",
     "lint": "eslint --ext \".js,.ts\" --fix .",
     "fmt": "prettier --write ."
   },
