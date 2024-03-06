@@ -11,7 +11,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
 }
 
 datasource db {
@@ -437,12 +438,13 @@ model CrawlerPokemonStats {
 
 model CrawlerPokemonTypes {
   id        Int
-  type      String         @db.VarChar(100)
+  rowNo     Int            @map("row_no")
+  type      String?        @db.VarChar(500)
   createdAt DateTime       @default(dbgenerated("NOW(3)")) @map("created_at")
   updatedAt DateTime       @default(dbgenerated("NOW(3) ON UPDATE NOW(3)")) @map("updated_at")
   pokemon   CrawlerPokemon @relation(fields: [id], references: [id])
 
-  @@id([id, type])
+  @@id([id, rowNo])
   @@map("t_crawler_pokemon_types")
 }
 
@@ -884,4 +886,15 @@ model CrawlerTypeMoves {
 
   @@id([id, rowNo])
   @@map("t_crawler_type_moves")
+}
+
+view PokemonView {
+id    Int     @id
+name  String?
+type1 String? @map("type_1")
+type2 String? @map("type_2")
+genus String?
+image String?
+
+@@map("v_pokemon")
 }
