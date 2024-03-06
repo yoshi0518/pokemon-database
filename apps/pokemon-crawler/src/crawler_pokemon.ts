@@ -33,6 +33,7 @@ type PokemonStatType = {
 };
 
 type PokemonTypeType = {
+  rowNo: number;
   type: string;
 };
 
@@ -108,11 +109,12 @@ const getPokemon = async (query?: QueryParamType) => {
       const pokemonTypeKey: string[] = [];
       const pokemonTypeData: PokemonTypeType[] = [];
 
-      body.types.forEach((item) => {
+      body.types.forEach((item, index) => {
         if (pokemonTypeKey.includes(item.type.name)) return;
 
         pokemonTypeKey.push(item.type.name);
         pokemonTypeData.push({
+          rowNo: index + 1,
           type: item.type.name,
         });
       });

@@ -5,7 +5,7 @@
   "private": true,
   "author": "yoshi0518",
   "scripts": {
-    "prisma:push": "prisma-import --force && prisma db push",
+    "prisma:push": "prisma-import --force && prisma db push && ts-node ./create_view.mjs",
     "prisma:reset": "prisma migrate reset",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
