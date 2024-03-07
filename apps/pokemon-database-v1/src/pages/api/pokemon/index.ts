@@ -1,9 +1,13 @@
-import { prisma } from '@project/database';
+import { PrismaClient } from '@prisma/client';
 import { NextApiHandler } from 'next';
 
 import { PokemonListType } from '@/libs/bffApi/@types';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 const handleGetList = async (req: NextApiRequest, res: NextApiResponse<PokemonListType | { message: string }>) => {
   const page = Number(req?.query?.page) || 1;

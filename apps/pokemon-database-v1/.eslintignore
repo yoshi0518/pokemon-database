@@ -42,3 +42,6 @@ src/libs/pokeApi
 # image
 public/images
 public/thumbnails
+
+# prisma
+/prisma

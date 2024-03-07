@@ -13,6 +13,7 @@ logs
 .DS_Store
 src/libs/bffApi
 src/libs/pokeApi
+prisma
 public/manifest.json
 public/images
 public/thumbnails

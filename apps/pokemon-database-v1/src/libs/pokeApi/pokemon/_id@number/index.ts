@@ -1,4 +1,4 @@
-import { PokemonType } from '../../@types';
+import type { PokemonType } from '../../@types';
 
 export type Methods = {
   get: {
