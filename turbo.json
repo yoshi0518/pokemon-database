@@ -8,10 +8,8 @@
       "cache": false,
       "persistent": true
     },
-    "prebuild": {},
     "build": {
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-      "dependsOn": ["^prebuild"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "start": {},
     "storybook": {}
