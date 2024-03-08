@@ -1,4 +1,4 @@
--- CREATE VIEW v_pokemon as
+-- CREATE VIEW v_pokemon_list as
 SELECT
   t_crawler_pokemon.id,
   t_crawler_pokemon_species_names.name,

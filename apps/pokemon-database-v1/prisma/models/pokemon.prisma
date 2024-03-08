@@ -861,7 +861,7 @@ model CrawlerTypeMoves {
   @@map("t_crawler_type_moves")
 }
 
-view PokemonView {
+view PokemonListView {
   id    Int     @id
   name  String?
   type1 String? @map("type_1")
@@ -869,5 +869,33 @@ view PokemonView {
   genus String?
   image String?
 
-  @@map("v_pokemon")
+  @@map("v_pokemon_list")
+}
+
+view PokemonDetailBaseView {
+  id                   Int      @id
+  name                 String?
+  baseExperience       Int?     @map("base_experience")
+  height               Int?
+  weight               Int?
+  isDefault            Boolean? @map("is_default")
+  order                Int?
+  baseHappiness        Int?     @map("base_happiness")
+  captureRate          Int?     @map("capture_rate")
+  color                String?
+  evolutionChain       Int?     @map("evolution_chain")
+  evolvesFromSpecies   String?  @map("evolves_from_species")
+  formsSwitchable      Boolean? @map("forms_switchable")
+  genderRate           Int?     @map("gender_rate")
+  generation           String?
+  growthRate           String?  @map("growth_rate")
+  habitat              String?
+  hasGenderDifferences Boolean? @map("has_gender_differences")
+  hatchCounter         Int?     @map("hatch_counter")
+  isBaby               Boolean? @map("is_baby")
+  isLegendary          Boolean? @map("is_legendary")
+  isMythical           Boolean? @map("is_mythical")
+  shape                String?
+
+  @@map("v_pokemon_detail_base")
 }

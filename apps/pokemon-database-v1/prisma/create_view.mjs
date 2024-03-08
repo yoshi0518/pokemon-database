@@ -6,11 +6,11 @@ const prisma = new PrismaClient({
 
 const main = async () => {
   await prisma.$executeRaw`
-DROP view IF EXISTS v_pokemon;
+DROP view IF EXISTS v_pokemon_list;
   `;
 
   await prisma.$executeRaw`
-CREATE VIEW v_pokemon as
+CREATE VIEW v_pokemon_list AS
 SELECT
   t_crawler_pokemon.id,
   t_crawler_pokemon_species_names.name,
@@ -67,6 +67,43 @@ FROM
     WHERE
       t_crawler_pokemon_species_genera.language = 'ja-Hrkt'
   ) AS \`t_crawler_pokemon_species_genera\` ON t_crawler_pokemon_species_genera.id = t_crawler_pokemon.id
+-- ORDER BY
+--  t_crawler_pokemon.id;
+  `;
+
+  await prisma.$executeRaw`
+DROP view IF EXISTS v_pokemon_detail_base;
+  `;
+
+  await prisma.$executeRaw`
+CREATE view v_pokemon_detail_base AS
+SELECT
+  t_crawler_pokemon.id,
+  t_crawler_pokemon.name,
+  t_crawler_pokemon.base_experience,
+  t_crawler_pokemon.height,
+  t_crawler_pokemon.weight,
+  t_crawler_pokemon.is_default,
+  t_crawler_pokemon.order,
+  t_crawler_pokemon_species.base_happiness,
+  t_crawler_pokemon_species.capture_rate,
+  t_crawler_pokemon_species.color,
+  t_crawler_pokemon_species.evolution_chain,
+  t_crawler_pokemon_species.evolves_from_species,
+  t_crawler_pokemon_species.forms_switchable,
+  t_crawler_pokemon_species.gender_rate,
+  t_crawler_pokemon_species.generation,
+  t_crawler_pokemon_species.growth_rate,
+  t_crawler_pokemon_species.habitat,
+  t_crawler_pokemon_species.has_gender_differences,
+  t_crawler_pokemon_species.hatch_counter,
+  t_crawler_pokemon_species.is_baby,
+  t_crawler_pokemon_species.is_legendary,
+  t_crawler_pokemon_species.is_mythical,
+  t_crawler_pokemon_species.shape
+FROM
+  t_crawler_pokemon
+  LEFT JOIN t_crawler_pokemon_species ON t_crawler_pokemon_species.id = t_crawler_pokemon.id
 -- ORDER BY
 --  t_crawler_pokemon.id;
   `;

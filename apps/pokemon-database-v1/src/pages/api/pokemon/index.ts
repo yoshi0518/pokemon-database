@@ -12,10 +12,10 @@ const prisma = new PrismaClient({
 const handleGetList = async (req: NextApiRequest, res: NextApiResponse<PokemonListType | { message: string }>) => {
   const page = Number(req?.query?.page) || 1;
   const size = Number(req?.query?.size) || 20;
-  const count = await prisma.pokemonView.count();
+  const count = await prisma.pokemonListView.count();
   const maxPage = Math.floor(count / size) + 1;
 
-  const selectData = await prisma.pokemonView.findMany({
+  const selectData = await prisma.pokemonListView.findMany({
     skip: size * (page - 1),
     take: size,
   });
