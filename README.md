@@ -4,9 +4,7 @@
 
 | ディレクトリ               | 内容                 |
 | -------------------------- | -------------------- |
-| apps/pokemon-crawler       | Pokemon Crawler      |
 | apps/pokemon-database-v1   | Pokemon DB(v1)       |
-| packages/database          | Prisma共通設定       |
 | packages/eslint-config     | ESLint 共通設定      |
 | packages/prettier-config   | Prettier 共通設定    |
 | packages/tailwind-config   | TailwindCSS 共通設定 |
