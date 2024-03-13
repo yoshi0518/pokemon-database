@@ -38,6 +38,13 @@ export const PokemonGridPage = () => {
   };
   const onClick = (id: string) => console.log({ id });
 
+  const onChange = (e) => {
+    setPagination((prev) => ({
+      ...prev,
+      size: e.target.value,
+    }));
+  };
+
   const { pokemonList, error, isLoading } = useReadPokemonList(String(pagination.currentPage), String(pagination.size));
 
   useEffect(() => {
@@ -69,50 +76,49 @@ export const PokemonGridPage = () => {
           className="mx-2"
         />
         <NaBaseSelect
+          value={pagination.size}
           selectItems={[
-            { label: 'label-1', value: 'item-1' },
-            { label: 'label-2', value: 'item-2' },
-            { label: 'label-3', value: 'item-3' },
+            { label: '20', value: '20' },
+            { label: '50', value: '50' },
+            { label: '100', value: '100' },
           ]}
+          onChange={onChange}
         />
       </div>
 
-      <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <ul role="list" className="my-2 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {pokemonList.data.map((pokemon) => (
           <li
             key={pokemon.id}
             className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow hover:shadow-xl"
             onClick={() => onClick(String(pokemon.id))}
           >
-            <div className="flex flex-1 flex-col p-8">
+            <div className="flex flex-1 flex-col p-4">
+              <div className="flex justify-between">
+                <div className="text-left">
+                  <div className="text-xl font-medium text-gray-500">{pokemon.id}</div>
+                  <div className=" font-semibold text-gray-500">{pokemon.name}</div>
+                </div>
+                <div>
+                  {pokemon.types[0] && (
+                    <div className={clsx('icon p-1', pokemon.types[0])}>
+                      <Image width={20} height={20} src={`/types/${pokemon.types[0]}.svg`} alt={pokemon.types[0]} />
+                    </div>
+                  )}
+                  {pokemon.types[1] && (
+                    <div className={clsx('icon mt-1.5 p-1', pokemon.types[1])}>
+                      <Image width={20} height={20} src={`/types/${pokemon.types[1]}.svg`} alt={pokemon.types[1]} />
+                    </div>
+                  )}
+                </div>
+              </div>
               <Image
-                // className="mx-auto"
-                // className="mx-auto blur-sm grayscale"
-                className={clsx('mx-auto', pokemon.id % 2 === 0 ? 'blur-sm grayscale' : null)}
-                width={128}
-                height={128}
+                className="mx-auto mt-4"
+                width={142}
+                height={142}
                 src={`/images/${pokemon.fileName}`}
                 alt={pokemon.name}
               />
-              <h3 className="mt-6 text-sm font-medium text-gray-900">{pokemon.name}</h3>
-              <div className="flex justify-between hover:bg-gray-50">
-                <div>Id</div>
-                <div className="text-right">{pokemon.id}</div>
-              </div>
-              <div className="flex justify-between hover:bg-gray-50">
-                <div>Type</div>
-                <div>
-                  {pokemon.types.map((type) => (
-                    <p key={type} className="text-right">
-                      {type}
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <div className="flex justify-between hover:bg-gray-50">
-                <div>Genera</div>
-                <div className="text-right">{pokemon.genus}</div>
-              </div>
             </div>
           </li>
         ))}
@@ -131,11 +137,13 @@ export const PokemonGridPage = () => {
           className="mx-2"
         />
         <NaBaseSelect
+          value={pagination.size}
           selectItems={[
-            { label: 'label-1', value: 'item-1' },
-            { label: 'label-2', value: 'item-2' },
-            { label: 'label-3', value: 'item-3' },
+            { label: '20', value: '20' },
+            { label: '50', value: '50' },
+            { label: '100', value: '100' },
           ]}
+          onChange={onChange}
         />
       </div>
     </>

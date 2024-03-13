@@ -2098,6 +2098,26 @@ export const staticPath = {
     $903_png: '/thumbnails/903.png',
     $904_png: '/thumbnails/904.png',
     $905_png: '/thumbnails/905.png'
+  },
+  types: {
+    bug_svg: '/types/bug.svg',
+    dark_svg: '/types/dark.svg',
+    dragon_svg: '/types/dragon.svg',
+    electric_svg: '/types/electric.svg',
+    fairy_svg: '/types/fairy.svg',
+    fighting_svg: '/types/fighting.svg',
+    fire_svg: '/types/fire.svg',
+    flying_svg: '/types/flying.svg',
+    ghost_svg: '/types/ghost.svg',
+    grass_svg: '/types/grass.svg',
+    ground_svg: '/types/ground.svg',
+    ice_svg: '/types/ice.svg',
+    normal_svg: '/types/normal.svg',
+    poison_svg: '/types/poison.svg',
+    psychic_svg: '/types/psychic.svg',
+    rock_svg: '/types/rock.svg',
+    steel_svg: '/types/steel.svg',
+    water_svg: '/types/water.svg'
   }
 } as const;
 
