@@ -1,3 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.icon {
+  @apply rounded-[100%] transition-[200ms] duration-[all] hover:scale-110 hover:cursor-pointer hover:saturate-[200%];
+}
+
+.bug {
+  @apply shadow-[0_0_20px_#92BC2C];
+  background: #92bc2c;
+}
+
+.dark {
+  @apply shadow-[0_0_20px_#595761];
+  background: #595761;
+}
+
+.dragon {
+  @apply shadow-[0_0_20px_#0C69C8];
+  background: #0c69c8;
+}
+
+.electric {
+  @apply shadow-[0_0_20px_#F2D94E];
+  background: #f2d94e;
+}
+
+.fire {
+  @apply shadow-[0_0_20px_#FBA54C];
+  background: #fba54c;
+}
+
+.fairy {
+  @apply shadow-[0_0_20px_#EE90E6];
+  background: #ee90e6;
+}
+
+.fighting {
+  @apply shadow-[0_0_20px_#D3425F];
+  background: #d3425f;
+}
+
+.flying {
+  @apply shadow-[0_0_20px_#A1BBEC];
+  background: #a1bbec;
+}
+
+.ghost {
+  @apply shadow-[0_0_20px_#5F6DBC];
+  background: #5f6dbc;
+}
+
+.grass {
+  @apply shadow-[0_0_20px_#5FBD58];
+  background: #5fbd58;
+}
+
+.ground {
+  @apply shadow-[0_0_20px_#DA7C4D];
+  background: #da7c4d;
+}
+
+.ice {
+  @apply shadow-[0_0_20px_#75D0C1];
+  background: #75d0c1;
+}
+
+.normal {
+  @apply shadow-[0_0_20px_#A0A29F];
+  background: #a0a29f;
+}
+
+.poison {
+  @apply shadow-[0_0_20px_#B763CF];
+  background: #b763cf;
+}
+
+.psychic {
+  @apply shadow-[0_0_20px_#FA8581];
+  background: #fa8581;
+}
+
+.rock {
+  @apply shadow-[0_0_20px_#C9BB8A];
+  background: #c9bb8a;
+}
+
+.steel {
+  @apply shadow-[0_0_20px_#5695A3];
+  background: #5695a3;
+}
+
+.water {
+  @apply shadow-[0_0_20px_#539DDF];
+  background: #539ddf;
+}
